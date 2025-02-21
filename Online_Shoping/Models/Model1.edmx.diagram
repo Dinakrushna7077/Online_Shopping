@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f7e447dcb4ac48f49cc432b90de928db" Name="Diagram1" ZoomLevel="79">
+        <EntityTypeShape EntityType="OnlineShoppingModel.Admin" Width="1.5" PointX="1.5" PointY="0.5" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.category" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.my_cart" Width="1.5" PointX="13.5" PointY="0.5" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.product_mst" Width="1.5" PointX="7.875" PointY="5.5" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.sysdiagram" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.User_Address" Width="1.5" PointX="5.75" PointY="6.125" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.user_mst" Width="1.5" PointX="2.625" PointY="6.75" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__category__adm_id__3A81B327" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__product_ms__c_id__412EB0B6" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__my_cart__p_id__787EE5A0" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__my_cart__u_id__778AC167" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__product_ms__u_id__403A8C7D" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__User_Addre__U_id__02084FDA" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.Address_View" Width="1.5" PointX="5.625" PointY="1.375" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.MyCartView" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.Order_Details" Width="1.5" PointX="11.375" PointY="5.375" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__Order_Deta__p_id__32AB8735" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.Order_View" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.Order_mst" Width="1.5" PointX="11" PointY="9.75" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__Order_Deta__o_id__31B762FC" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__Order_mst__Add_i__2EDAF651" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__Order_mst__u_id__2DE6D218" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.Order_Details_View" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="OnlineShoppingModel.Cancel_Order" Width="1.5" PointX="13.625" PointY="6.25" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__Cancel_Or__od_id__3F115E1A" />
+        <AssociationConnector Association="OnlineShoppingModel.FK__Cancel_Ord__U_id__3E1D39E1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

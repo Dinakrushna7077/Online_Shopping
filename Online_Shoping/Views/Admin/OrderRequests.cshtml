@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Online_Shoping.Models.Order_Details_View>
+@{
+    ViewBag.Title = "OrderRequests";
+}
+
+<html>
+    <head>
+        <style>
+            .ord-row{
+                display:flex;
+                justify-content:space-between;
+            }
+            .ord-row img{
+                width:100px;
+                height:100px;
+            }
+            .heading{
+                border-bottom:1px solid #9e9e9e;
+            }
+            .quantity, .country{
+                width:1rem;
+            }
+            .accept,.reject{
+                height:2rem;
+                color:white;
+                padding:0.2rem;
+                border-radius:5px;
+                cursor:pointer;
+            }
+            .accept:hover ,.reject:hover{
+                color:white;
+                
+            }
+            .accept{
+                background-color:green;
+            }
+            .reject{
+                background-color:red;
+            }
+        </style>
+    </head>
+<body>
+    <div class="order-req-container">
+        <div class="ord-row">
+            <h4 class="p-1 heading">Product Image</h4>
+            <h4 class="w-25 p-1"><label class="heading">Name</label></h4>
+            <h4 class="p-1 heading">Quantity</h4>
+            <h4 class="p-1 heading">Country</h4>
+            <h4 class="p-1 heading">Action</h4>
+
+        </div>
+        @foreach(var ordr in Model)
+        {
+            <div class="ord-row">
+                <img src="@Url.Content(ordr.image)" alt="@ordr.p_name" />
+                <div class="text-start w-25 d-flex align-items-center">
+                    @ordr.p_name
+                </div>
+                <div class="quantity d-flex align-items-center">
+                    @ordr.quantity
+                </div>
+                <div class="country d-flex align-items-center">
+                    @ordr.Country
+                </div>
+                <div class="actions d-flex align-items-center gap-3">
+                    <a class="accept" href="@Url.Action("AcceptOrder","Admin",new {od_id=ordr.od_id})">Accept</a>
+                    <a class="reject" href="@Url.Action("RejectOrder","Admin",new {od_id=ordr.od_id})">Reject</a>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

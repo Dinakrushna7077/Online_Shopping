@@ -1,0 +1,143 @@
+﻿@model Online_Shoping.Models.User_Address
+@{
+    ViewBag.Title = "AddNewAddress";
+}
+<html>
+<head>
+    <title>New Address</title>
+    <style>
+        .box{
+            margin: 1.5rem;
+            height:10rem;
+        }
+        .in-box{
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+            margin:2px;
+        }
+        .box-container{
+            height:auto;
+            width:auto;
+        }
+        #btn-add-address {
+            padding: 0.5rem 1rem 0.5rem 1rem;
+            background-color: #00962e;
+            border-radius: 7px;
+            color: white;
+            font-weight: 600;
+            font-size: larger;
+            border: 3px ridge white;
+        }
+        .txt_box{
+            height:3rem;
+        }
+        #Name, #City, #Address_line1,#State,#Mobile,#PIN,#Country,#Alt_Mobile,#Dist{
+            height: 2.5rem;
+            width:11.6rem;
+        }
+        h4 {
+            background-color: #c1c0c0;
+        }
+
+        .box-parent {
+            background-color: lightgray;
+            margin-top: 6rem;
+            padding-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal-body d-flex justify-content-around box-parent">
+        @using (Html.BeginForm("AddNewAddress", "User","POST"))
+        {
+            <h4 class="text-center mt-xl-4 p-2">New Address</h4>
+            <div class="d-flex box-container">
+                <div class="box d-flex">
+                    <div class="in-box">
+                        <div>
+                            <label for="Name" class="col-form-label">Name :</label>
+                        </div>
+                        <div>
+                            <label for="Address_line1" class="col-form-label">Area / Village / Road :</label>
+                        </div>
+                        <div>
+                            <label for="State" class="col-form-label">State :</label>
+                        </div>
+                        <div>
+                            <label class="col-form-label">Address Type :</label><br />
+                        </div>
+                    </div>
+                    <div class="in-box">
+                        <div>
+                            @Html.EditorFor(u => u.Name, new { htmlAttributes = new { @placeholder = "Enter Name" } })
+                        </div>
+                        <div>
+                            @Html.EditorFor(x => x.Address_line1, new { htmlAttributes = new { @placeholder = "Enter Delivery Address" } })
+                        </div>
+                        <div>
+                            @Html.DropDownListFor(x => x.State, ViewBag.StateList as SelectList, "--Select--")
+
+                        </div>
+                        <div>
+                            @Html.RadioButtonFor(x => x.Add_Type, "Home", new { id = "Home" }) <label for="Home">Home</label>&nbsp; &nbsp;
+                            @Html.RadioButtonFor(x => x.Add_Type, "Office", new { id = "Office" }) <label for="Office">Office</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="box d-flex">
+                    <div class="in-box">
+                        <div>
+                            <label for="Mobile" class="col-form-label">Mobile No :</label>
+                        </div>
+                        <div>
+                            <label for="PIN" class="col-form-label">Pin :</label>
+                        </div>
+                        <div>
+                            <label for="Country" class="col-form-label">Country :</label>
+                        </div>
+                    </div>
+                    <div class="in-box">
+                        <div>
+                            @Html.EditorFor(x => x.Mobile, new { htmlAttributes = new { @placeholder = "Enter Mobile Number" } })
+                        </div>
+                        <div>
+                            @Html.EditorFor(x => x.PIN, new { htmlAttributes = new { @placeholder = "Enter PIN Code" } })
+                        </div>
+                        <div>
+                            @Html.EditorFor(x => x.Country, new { htmlAttributes = new { @placeholder = "Enter Country" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="box d-flex">
+                    <div class="in-box">
+                        <div>
+                            <label for="Alt_Mobile" class="col-form-label">Alternate Mobile No :</label>
+                        </div>
+                        <div>
+                            <label for="City" class="col-form-label">City :</label>
+                        </div>
+                        <div>
+                            <label class="col-form-label">Distict :</label><br />
+                        </div>
+                    </div>
+                    <div class="in-box">
+                        <div>
+                            @Html.EditorFor(x => x.Alt_Mobile, new { htmlAttributes = new { @placeholder = "Enter Alternate Mobile Number" } })
+                        </div>
+                        <div>
+                            @Html.EditorFor(x => x.City, new { htmlAttributes = new { @placeholder = "Enter City" } })
+                        </div>
+                        <div>
+                            @Html.EditorFor(x => x.Dist, new { htmlAttributes = new { @placeholder = "Enter Dist" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button id="btn-add-address" class="text-center">Save Address</button>
+            </div>
+        }
+    </div>
+</body>
+</html>

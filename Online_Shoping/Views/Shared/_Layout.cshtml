@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta author="Dinakrushna Mohanta" />
+    <title>UrbanBasket - @ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="icon" type="png" href="~/Assets/icon2.png" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary" style="z-index:1; position:fixed;top:0px; width:100%">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand text-white" href="#"><b style="color:#02ff35;">Urban</b><b style="color:#ff7d00;">Basket</b></a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" style="font-weight:500;">
+                        <a class="nav-link text-white" aria-current="page" style="font-size:large;"><i class="fa-solid fa-location-dot"></i>&nbsp;India</a>
+                    </li>
+                    <li class="nav-item">
+                        <form class="d-flex" role="search" method="get">
+                            @Html.Editor("SearchBy","ss", new { htmlAttributes = new { @placeholder = "Search",@class= "form-control me-2" } })
+                            <button class="btn btn-secondary" type="submit" style="background-color:#ff7d00;">Search</button>
+                        </form>
+                    </li>
+
+
+                </ul>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left:14%;">
+
+                    <li class="nav-item" style="margin-right: 15px;">
+                        
+                        <a class="nav-link text-white" aria-current="page" href="@Url.Action("UserHome", "User")"><i class="fa-solid fa-home text-white"></i>&nbsp;Home</a>
+</li>
+                    @if (Session["Admin_Id"] != null)
+                    {
+                        <li class="nav-item" style="margin-right: 15px;">
+                            <a class="nav-link text-white" aria-current="page" href="@Url.Action("MyCart", "User")"><i class="fa-solid fa-cart-shopping"></i>&nbsp;My Cart</a>
+                        </li>
+                        <li class="nav-item" style="margin-right: 15px;">
+                            <a class="nav-link text-white" aria-current="page" href="@Url.Action("Orders", "User")"><i class="fa-solid fa-truck-fast"></i>&nbsp;Orders</a>
+                        </li>
+                        <li class="nav-item" style="margin-right: 15px;">
+                            <a class="nav-link text-white " aria-current="page" href="#" style="height:20px; "><i class="fa-solid fa-user-large"></i>&nbsp;@Session["UserName"].ToString().Split(' ')[0]</a>
+                        </li>
+                        <li class="nav-item" style="margin-right: 0px;">
+                            <strong>
+                                <a class="nav-link " aria-current="page" href="@Url.Action("Logout", "User")" style="color: #ff7d00;"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #ff7d00;"></i> Logout</a>
+                            </strong>
+                            @*<a class="nav-link text-white " aria-current="page" style="height:20px; "><i class="fa-solid fa-user-large"></i>&nbsp;</a>*@
+                        </li>
+                    }
+                    else
+                    {
+                <li class="nav-item" style="margin-right: 15px;">
+                    
+                    <a class="nav-link text-white" aria-current="page" href="@Url.Action("UserLogin", "User")"><i class="fa-solid fa-user text-white" style="padding-left:8px;"></i>&nbsp;Login</a>
+                    
+                </li>
+                <li class="nav-item" style="margin-right: 15px;">
+                    <a class="nav-link text-white" aria-current="page" href="@Url.Action("SignUp", "User")">
+                        <i class="fa-solid fa-user-plus text-white" style="padding-left:8px;"></i>
+                        SignUp
+                    </a>
+                    @*@Html.ActionLink("Sign Up", "SignUp", "User", null, new { @class = "nav-link text-white d-inline", style = "height:20px; padding-left:0px;" })*@
+                </li>
+
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        
+
+        <div id="top" onclick="Scroll();"><i class="fa-solid fa-arrow-up"></i></div>
+        <div class="container my-5" >
+            
+            <footer class="text-center text-lg-start text-dark"
+                    style="background-color: #ECEFF1; width: 100%;">
+                
+                <section class="d-flex justify-content-between p-4 text-white"
+                         style="background-color: #0094ff">
+                    
+                    <div class="me-5 text-capitalize">
+                        <span style="color:white; font-weight:500;">Connected with us on social Media :</span>
+                    </div>
+                    
+                    <div>
+                        <a href="https://www.facebook.com/share/15WScMzPnC/" class="text-white me-4">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://x.com/mohanta5673" class="text-white me-4">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="" class="text-white me-4">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="https://www.instagram.com/official_dina_adc/profilecard/?igsh=dmJrY20yc2Q1dGVw" class="text-white me-4">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/dinakrushna-mohanta-128a49321?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-white me-4">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Dinakrushna7077" class="text-white me-4">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                    
+                </section>
+                
+                <section class="">
+                    <div class="container text-center text-md-start mt-5">
+                        
+                        <div class="row mt-3">
+                            
+                            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                                
+                                <h6 class="text-capitalize fw-bold">UrbanBasket</h6>
+                                <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                                    style="width: 60px; background-color: #7c4dff; height: 2px" />
+                                <p style="font-size:small;">
+                                    Welcome to UrbanBasket, your ultimate shopping destination! 
+                                    We offer a wide selection of high-quality products across fashion, 
+                                    electronics, home goods, and more, all at great prices. Enjoy a seamless 
+                                    shopping experience with fast delivery, secure checkout, and exceptional customer 
+                                    service. Your satisfaction is our top priority. Start shopping today and discover the 
+                                    best deals, delivered right to your door!
+                                </p>
+                            </div>
+                            
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                                
+                                <h6 class="text-uppercase fw-bold">Products</h6>
+                                <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                                    style="width: 60px; background-color: #7c4dff; height: 2px" />
+                                <p>
+                                    <a href="#!" class="text-dark">Electronics</a>
+                                </p>
+                                <p>
+                                    <a href="#!" class="text-dark">Fashions</a>
+                                </p>
+                                <p>
+                                    <a href="#!" class="text-dark">Decoration</a>
+                                </p>
+                                <p>
+                                    <a href="#!" class="text-dark">Educational</a>
+                                </p>
+                            </div>
+                            
+                            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                                
+                                <h6 class="text-uppercase fw-bold">Join with Us</h6>
+                                <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                                    style="width: 60px; background-color: #7c4dff; height: 2px" />
+                                <p>
+                                    <a href="#!" class="text-dark">Sell On Our Website</a>
+                                </p>
+                                <p>
+                                    <a href="#!" class="text-dark">Become a member</a>
+                                </p>
+                                <p>
+                                    <a href="#!" class="text-dark">Plus Memper</a>
+                                </p>
+                                <p>
+                                    <a href="#!" class="text-dark">Advertise Products</a>
+                                </p>
+                            </div>
+                            
+                            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                                
+                                <h6 class="text-uppercase fw-bold">Contact</h6>
+                                <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                                    style="width: 60px; background-color: #7c4dff; height: 2px" />
+                                <p><i class="fas fa-home mr-3"></i> Jajpur, Odisha, India</p>
+                                <p><i class="fas fa-envelope mr-3"></i> sbinfotech@gmail.com</p>
+                                <p><i class="fas fa-phone mr-3"></i> +91 7077027750</p>
+                                <p><i class="fas fa-print mr-3"></i> +91 1800978007</p>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </section>
+                
+                <div class="text-center p-3"
+                     style="background-color: rgba(0, 0, 0, 0.2)">
+                    &copy; @DateTime.Now.Year Copyright:
+                    <a class="text-dark" href="@Url.Action("UserHome", "User")">UrbanBasket.co.in</a>
+                </div>
+                
+            </footer>
+            
+        </div>
+        
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Content/MyScript.js"></script>
+</body>
+</html>

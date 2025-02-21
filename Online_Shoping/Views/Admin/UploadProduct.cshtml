@@ -1,0 +1,82 @@
+﻿@using Online_Shoping.Models;
+@model product_mst
+@{
+    ViewBag.Title = "UploadProduct";
+}
+<html>
+<head>
+    <title>Add New Products</title>
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/Content/UploadProduct.css" />
+</head>
+<body>
+    <div class="text-center">@TempData["msg"]</div>
+    <div class="container">
+        <div class="d-flex flex-column vh-100 w-100 align-items-center justify-content-center containerr">
+            @using (Html.BeginForm("UploadProduct", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+                <div class="text-center text-danger"><h2>New Product</h2></div>
+                <br />                
+                <div class="d-flex flex-column p-5  mycls">
+                    <div class="d-flex align-items-center justify-content-center flex-column">
+                        <div class="d-flex justify-content-between">
+                            <div class="p-2 m-2 left">
+                                <div>
+                                    @Html.LabelFor(x => x.c_id) &nbsp;<span>*</span>
+                                    <p class="text-danger">@Html.ValidationMessageFor(x => x.c_id)</p>
+                                </div>
+                                <div>
+                                    @Html.LabelFor(x => x.p_name)&nbsp;<span>*</span>
+                                    <p class="text-danger">@Html.ValidationMessageFor(x => x.p_name)</p>
+                                </div>
+                                <div>
+                                    @Html.LabelFor(x => x.price)&nbsp;<span>*</span>
+                                    <p class="text-danger">@Html.ValidationMessageFor(x => x.price)</p>
+                                </div>
+                                <div>
+                                    @Html.LabelFor(x => x.p_desc)&nbsp;<span>*</span>
+                                    <p class="text-danger">@Html.ValidationMessageFor(x => x.p_desc)</p>
+                                </div>
+                                <div>
+                                    @Html.LabelFor(x => x.p_status)&nbsp;<span>*</span>
+                                    <p class="text-danger">@Html.ValidationMessageFor(x => x.p_status)</p>
+                                </div>
+                                <div>
+                                    @Html.LabelFor(x => x.image)&nbsp;<span>*</span>
+                                    <p class="text-danger">@Html.ValidationMessageFor(x => x.File)</p>
+                                </div>                                
+                            </div>
+                            <div class="m-2 p-2 right">
+                                <div>
+                                    @Html.DropDownListFor(x => x.c_id, ViewBag.catList as SelectList, "--Select--", new { @class = "form-control" })
+                                </div>
+                                <div>
+                                    @Html.EditorFor(x => x.p_name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Category Name" } })
+                                </div>
+                                <div>
+                                    @Html.EditorFor(x => x.price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Price" } })
+                                </div>
+                                <div>
+                                    @Html.EditorFor(x => x.p_desc, new { htmlAttributes = new { @class = "form-control", @placeholder = "Description" } })
+                                </div>
+                                <div>
+                                    @Html.DropDownListFor(x => x.p_status, ViewBag.product_status as SelectList, "--Select--", new { @class = "form-control" })
+                                </div>
+                                <div>
+                                    <input type="file" name="File" />
+                                </div>                                
+                            </div>                            
+                        </div>
+                    </div>                    
+                    <div class="p-2 text-center">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>
+
+
+

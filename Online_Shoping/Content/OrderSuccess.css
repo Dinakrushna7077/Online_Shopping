@@ -1,0 +1,67 @@
+﻿
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    transition: all 2s ease-in;
+}
+
+.crl-cont {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    width: 170px;
+    height: 170px;
+    background-color: green;
+    border-radius: 50%;
+    transition: width 2s, height 2s;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: large;
+    font-weight: 600;
+}
+
+#myButton {
+    display: none;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    color: forestgreen;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #e74c3c;
+    border-radius: 50%;
+    opacity: 0;
+    animation: fall 2s linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(100vh);
+    }
+}
+

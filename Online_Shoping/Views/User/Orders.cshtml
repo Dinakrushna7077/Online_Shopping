@@ -1,0 +1,128 @@
+﻿@model IEnumerable<Online_Shoping.Models.Order_View>
+@{
+    ViewBag.Title = "Orders";
+    //int[] ar = new int[5];
+}
+<html>
+<head>
+    <style>
+        .loop {
+            display: flex;
+            justify-content:space-between;
+            width: 100%;
+            border: 1px solid black;
+            padding: 0.9rem 0.9rem 0.9rem 0rem;
+            margin: 0rem 0rem 1.2rem 0rem;
+            border-radius: 5px;
+        }
+        .in-div{
+            color:black;
+            display:flex;
+            flex-direction:column;
+            justify-content:space-evenly;
+            
+        }
+        .img-cont{
+            height:8rem;
+            width:6rem;
+            /*background-color:aliceblue;*/
+            margin-left:1rem;
+        }
+        .details{
+            display:flex;
+            flex-direction:column;
+            gap:normal;
+            align-items:center;
+            justify-content:center;
+            width:50%;
+        }
+        .price{
+            width:20%;
+        }
+        .status{
+            width:25%;
+        }
+        .desc{
+            color:#808080;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container p-2" id="p">
+        <div class="row" style="margin-bottom:60px;">
+            @if (Model != null)
+            {
+                foreach (var i in Model)
+                {
+                    <a class="loop" href="@Url.Action("Order_Details", "User",new {od_id=i.od_id})">
+                        <div class="img-cont in-div"><img src="@Url.Content(i.image)" alt="@i.p_name" /></div>
+                        <div class="details">
+                            <h4 style="color:#000000;">@i.p_name</h4><br />
+
+
+                            @if (i.p_desc.Length >= 50)
+                            {
+                                <i class="desc">
+                                    @i.p_desc.Substring(0,55) . . .
+                                </i>
+                            }
+                            else
+                            {
+                                <i class="desc">
+                                    @i.p_desc.Substring(0,i.p_desc.Length) . . .
+                                </i>
+                            }
+                            @if (false)
+                            {
+                                <strong class="size">
+                                    size
+                                </strong>
+                            }
+                        </div>
+                        @*<div class="in-div price">
+                            <h5 class="cp">₹<b> @i.total_amount</b></h5>
+                        </div>*@
+                        <div class="in-div align-items-center status">
+                            
+                            @if (i.order_status.ToLower() == "delivered")
+                            {
+                                <h5 class="d-inline"><i class="fa-solid fa-square text-success d-inline"></i> Delivered on @i.order_dt.Value.ToString("d MMM yyyy")</h5>
+                                <div>Your item is delivered</div>
+                            }
+                            else if (i.order_status.ToLower() == "pending")
+                            {
+                                <div><i class="fa-solid fa-square text-danger d-inline"></i> @i.order_status </div>
+                                <div>Your Order is currently pending </div>
+                            }
+                            else if (i.order_status.ToLower() == "cancelled")
+                            {
+                        <div><i class="fa-solid fa-square text-danger d-inline"></i> @i.order_status on @i.order_dt.Value.ToString("d MMM yyyy")</div>
+                                <div>Cancelation Message</div>
+                            }
+                            else
+                            {
+                                <div><i class="fa-solid fa-square text-warning d-inline"></i> @i.order_status</div>
+                                
+                            }
+                        </div>
+                    </a>
+                }
+            }
+            else
+            {
+                <div class="bg-danger">
+                    <b>
+                        Ready to place an order?
+                    </b><br />
+                    <b>Shop now and enjoy amazing products!</b>
+                </div>
+            }
+
+            @*<div class="mt-xxl-4 text-center">
+                <h5 class="text-danger m-1">End Of Order . . . </h5>
+            </div>*@
+        </div>
+    </div>
+</body>
+</html>

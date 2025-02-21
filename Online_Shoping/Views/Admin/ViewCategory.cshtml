@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Online_Shoping.Models.category>
+@{
+    ViewBag.Title = "ViewCategory";
+}
+
+<html>
+<head>
+    <title>View Categories</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/Content/ViewCatHover.css" />
+    <script src="~/Content/MyScript.js"></script>
+</head>
+<body>
+    @Html.Raw(TempData["Msg"])
+    <div class="container p-2">
+        <div class="row" style="margin-bottom:60px;">
+            @if (Model != null)
+            {
+                foreach (var i in Model)
+                {
+                    <div class="col-md-3 col-lg-4 col-xl-2  mb-1 hov-cls">
+                        <img src="@Url.Content(@i.image)" alt="@i.name" />
+                        <h5 style="color:#808080; text-align:center;">@i.name</h5>
+                        <div class="text-center">
+                            @Html.ActionLink("Delete", "DeleteCategory", "Admin", new { id = i.cat_id }, new { @class = "btn btn-danger btn-sm" })
+                            @Html.ActionLink(" Edit ", "EditCategory", "Admin", new { id = i.cat_id }, new { @class = "btn btn-primary btn-sm" })
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="mt-xxl-4 text-center">
+        <h5 class="text-danger m-1">No More Product . . . </h5>
+    </div>
+</body>
+</html>

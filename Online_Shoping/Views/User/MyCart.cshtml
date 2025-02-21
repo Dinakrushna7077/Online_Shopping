@@ -1,0 +1,328 @@
+﻿@model IEnumerable<Online_Shoping.Models.CartManagment>
+
+@{
+    ViewBag.Title = "MyCart";
+    var CartItems = ViewBag.Items;
+    var First = Model.FirstOrDefault();
+    var TotalMP = Convert.ToDouble(TempData["TotalMarketPrice"]);
+    var TotalP = Convert.ToDouble(TempData["TotalPrice"]);
+    var Discount = TotalMP - TotalP;
+}
+<html>
+<head>
+    <title>View Product</title>
+    @*<link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+            <link rel="stylesheet" href="~/Content/bootstrap.css" />
+            <link rel="stylesheet" href="~/Content/Site.css" />
+        <link rel="stylesheet" href="~/Content/ViewCatHover.css" />*@
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @*<script src="~/Content/MyScript.js"></script>*@
+    <style>
+        body {
+            background-color: aliceblue;
+        }
+
+        .containerrr {
+            display: flex;
+            height: 100%;
+            width: 98%;
+            padding: 2rem 0 2rem 0;
+        }
+
+        .left-cont {
+            /*height: 1200px;*/
+            width: 60%;
+            background-color: aliceblue;
+        }
+
+        .right-cont {
+            margin-bottom: 1rem;
+            height: 16rem;
+            width: 40%;
+            background-color: aliceblue;
+            margin-left: 0.6rem;
+            position: sticky;
+            top: 60px;
+            box-shadow: 0 8px 6px -6px black;
+        }
+
+        .left-cont .loopp {
+            font-size: 15px;
+            display: flex;
+            height: 14rem;
+            width: 100%;
+            background-color: white;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 6px -6px black;
+        }
+
+        .left-element {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 25%;
+            align-items: center;
+            justify-content: space-around;
+            /*background-color: white;*/
+        }
+
+        .right-element {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            align-items: start;
+            justify-content: space-around;
+            /*background-color: yellow;*/
+            padding: 1rem;
+        }
+
+        #i-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        #empty {
+            font-size: 5rem;
+            background-attachment: fixed;
+        }
+
+        .img-container {
+            height: 100px;
+            width: 100px;
+        }
+
+        img {
+            height: 140px;
+            aspect-ratio: 2/2;
+        }
+
+        .address {
+            height: 6rem;
+            width: 100%;
+            position: sticky;
+            bottom: 0rem;
+            background-color: white;
+            box-shadow: 0 0 4px black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+        }
+
+        .add-type {
+            display: inline;
+            border: 1px solid black;
+            padding: 0.2rem;
+            background-color: rgb(128, 128, 128,0.2);
+            border-radius: 0.2rem;
+        }
+
+        .add-left {
+            width: 85%;
+        }
+
+        .btn-continue {
+            padding: 0.5rem;
+            background-color: forestgreen;
+            border-radius: 0.3rem;
+            font-weight: 500;
+        }
+
+        .address div a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .details {
+            font-size: 13px;
+        }
+
+        .offer {
+            color: deepskyblue;
+            /*font-weight: bold;*/
+        }
+
+        #save {
+            color: darkgreen;
+        }
+        .price-element{
+            display:flex;
+            flex-direction:row;
+            justify-content:space-between;
+            /*background-color:green;*/
+            padding:0.3rem 0 0.3rem 0;
+        }
+        #price-heading {
+            color: gray;
+            margin-bottom: 0.05rem;
+            padding: 1rem;
+            background-color: white;
+            box-shadow: 0 4px 5px -6px black;
+        }
+        .price-cont {
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
+            padding: 1rem;
+            background-color: white;
+            width: 100%;
+            height: 80%;
+            box-shadow: 0 8px 6px -6px black;
+        }
+        .amount-border{
+            border-top:1px dashed #c0c0c0;
+            
+        }
+        #discount-price{
+            color:forestgreen;
+        }
+        .quantity-cont{
+            display:flex;
+            justify-content:space-evenly;
+            width:100%;
+        }
+        .inc-dec{
+            height:2rem;
+            width:2rem;
+            border-radius:40%;
+            border:1px solid #c0c0c0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:22px;
+            font-weight:bold;
+            color:black;
+        }
+        .quantity{
+            height:2rem;
+            width:2.5rem;
+            display:flex;  
+            align-items:center;
+            justify-content:center;
+            border-radius:10%;
+            border:1px solid #c0c0c0;
+        }
+        .remove {
+            padding: 0.2rem;
+            background-color: orangered;
+            border-radius: 0.3rem;
+            font-weight: 500;
+            color: white;
+            text-align: center;
+            margin-top: 0.05rem;
+        }
+        .name-cont{
+            display:flex;
+            width:100%;
+            justify-content:space-between;
+        }
+        .name-cont a{
+            font-size:25px;
+            /*background-color:red;
+            border:1px solid #c0c0c0;
+            border-radius:50%;*/
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height:2rem;
+            width:2rem;
+            text-align:center;
+            color:orangered;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="containerrr">
+        <div class="left-cont">
+            @if (Model.Count() > 0)
+            {
+                foreach (var i in Model)
+                {
+                    <div class="loopp">
+                        <div class="left-element">
+                            <img src="@Url.Content(i.Image)" />
+                            <div class="quantity-cont">
+                                <div>
+                                    @Html.ActionLink("-", "Decrement", "User", new { pid = i.P_Id },new { @class = "inc-dec" })
+                                </div>
+                                <div id="quantity-@i.P_Id">
+                                    @Html.Partial("_Quantity", i)
+                                </div>
+                                <div>
+                                    @Html.ActionLink("+", "Increment", "User", new { pid = i.P_Id },  new { @class = "inc-dec" })
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                        <div class="right-element">
+                            <div class="name-cont">
+                                <h5>@i.P_Name </h5> <a href="@Url.Action("RemoveProduct", "User", new { pid = i.P_Id})" title="Remove">@*<i class="fa-solid fa-xmark"></i>*@<i class="fa-regular fa-trash-can"></i></a>
+                            </div>
+                            <p>@i.Desc</p>
+
+                            <p>
+                                <s>₹@(i.MPrice*i.Quantity) </s>&nbsp; <b class="offer"> @i.Offer % Off</b>
+                            </p>
+
+                            <p>
+                                <b>₹@(i.CPrice*i.Quantity)</b>
+                            </p>
+
+                        </div>
+                    </div>
+
+                }
+                <div class="address">
+                    <div class="add-left">
+                        Deliver To : <b> @First.UName &nbsp; @First.PIN</b>
+                        <section class="details">
+
+                            @First.Address
+                            @First.PIN
+                            <div class="add-type" title="Delivered To ">@First.Add_Type</div>
+                        </section>
+                    </div>
+                    <div title="Continue Shoping...">
+                        @Html.ActionLink("Continue", "DeliveryAddress", "User", new { @class = "btn-continue" })
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="loop">
+                    <div class="details-container">
+                        <h5 class="text-danger">Your Cart Is Empty...</h5>
+                        @Html.ActionLink("Shop Now", "UserHome", "User", new { @class = "btn btn-go" })
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+        @if (Model.Count() <= 0)
+        {
+            <div class="right-cont">
+                <div id="i-container" title="Ooops... Your Cart Is Empty">
+                    <i class="fa-brands fa-opencart" id="empty"></i>
+                </div>
+            </div>
+        }
+        else
+        {
+
+    <div class="right-cont">
+        @Html.Partial("_PriceDetails")        
+    </div>
+        }
+    </div>
+</body>
+</html>

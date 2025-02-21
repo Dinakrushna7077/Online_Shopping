@@ -1,0 +1,49 @@
+﻿@model Online_Shoping.Models.category
+
+@{
+    ViewBag.Title = "DeleteCategory";
+}
+
+
+@*Error Occuring For confirming *@
+<h3 class="text-danger text-center">Are you sure you want to delete this?</h3>
+<div>
+    <h4>category</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Product Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            Product Image
+        </dt>
+
+        <dd>
+            <img src="@Url.Content(Model.image)" height="100" style="border-radius:10px;" />
+        </dd>
+
+        <dt>
+            Admin
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            @Html.ActionLink("Back to List", "ViewCategory", "Admin")
+        </div>
+    }
+</div>

@@ -1,0 +1,26 @@
+﻿.hov-cls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 175px;
+}
+
+    .hov-cls img {
+        width: 100%;
+        height: 62%;
+        border-radius: 10px;
+        border: 2px solid black;
+        transition: all .1s ease-in-out 100ms;
+    }
+
+        .hov-cls img:hover {
+            width: 103%;
+            height: 65%;
+            filter: contrast(115%);
+        }
+
+    .hov-cls h5 {
+        color: #808080;
+        text-align: center;
+    }

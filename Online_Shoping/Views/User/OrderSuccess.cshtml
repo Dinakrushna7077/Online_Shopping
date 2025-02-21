@@ -1,0 +1,54 @@
+﻿
+    @{
+        ViewBag.Title = "OrderSuccess";
+    }
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Placed</title>
+    <link rel="stylesheet" href="~/Content/OrderSuccess.css">
+    
+</head>
+<body id="cc">
+    <div class="crl-cont" >
+        <div class="circle" id="circle"><p>🎉Order Success🎉</p>
+        <a href="@Url.Action("Orders","User")" id="myButton">Order Details</a>
+        @*<label id="myButton" >Click</label>*@
+        </div>
+    </div>
+    <script>
+        // script.js
+        window.onload = function () {
+            var circle = document.getElementById('circle');
+            var button = document.getElementById('myButton');
+            var co = document.getElementById('cc');
+            setTimeout(() => {
+                circle.style.width = '90vh';
+                circle.style.height = '90vh';
+                
+            }, 800); 
+            setTimeout(function () {
+                button.style.display = 'block'; // Display the button
+            }, 3000);
+            setTimeout(()=> {
+                cc.style.backgroundColor ='green'; // Display the button
+            }, 1000);
+            function createParticles() {
+                for (var i = 0; i < 100; i++) {
+                    var particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.animationDelay = Math.random() * 2 + 's';
+                    particlesContainer.appendChild(particle);
+                }
+            }
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿@model Online_Shoping.Models.User_Address
+
+
+<div> <button type="button" class="btn" id="btn-add" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="mdo">New Address</button></div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">New Address</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex justify-content-around">
+                <!--Begin Form For New Address-->
+                @using (Html.BeginForm())
+                {
+                    <div class="d-flex">
+                        <div class="m-3">
+                            <label for="recipient-name" class="col-form-label">Name :</label>
+                            @Html.EditorFor(x=>x.Name)
+                        </div>
+                        <div class="m-3">
+                            <label for="recipient-name" class="col-form-label">Mobile No :</label>
+                            @Html.EditorFor(x => x.Mobile)
+                        </div>
+                        <div class="m-3">
+                            <label for="recipient-name" class="col-form-label">Alternate Mobile No :</label>
+                            @Html.EditorFor(x => x.Alt_Mobile)
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="m-3">
+                            <label for="recipient-name" class="col-form-label">Area / Village / Road :</label>
+                            @Html.EditorFor(x => x.Address_line1)
+                        </div>
+
+                        <div class="m-3">
+                            <label for="recipient-name" class="col-form-label">Pin :</label>
+                            @Html.EditorFor(x => x.PIN)
+                        </div>
+                        <div class="m-3">
+                            <label for="recipient-name" class="col-form-label">City :</label>
+                            @Html.EditorFor(x => x.City)
+                        </div>
+                    </div>
+                    <div class="d-flex">
+
+                        <div class="m-3">
+                            <label for="recipient-name" class="col-form-label">State :</label>
+                            @Html.EditorFor(x => x.State)
+                        </div>
+                        <div class="m-3">
+                            <label for="recipient-name" class="col-form-label">Country :</label>
+                            @Html.EditorFor(x => x.Country)
+                        </div>
+                        <div class="m-3">
+                            <label for="recipient-name" class="col-form-label">Address Type :</label><br />
+                            @Html.RadioButtonFor(x => x.Add_Type,"Home")<label for="Home">Home</label>
+                            @Html.RadioButtonFor(x => x.Add_Type,"Office")<label for="Office">Office</label>
+
+                        </div>
+                    </div>
+                    <button id="btn-add-address" class="d-none"></button>
+
+                }
+
+                <!--Ending THe Form For New Address-->
+                @*<form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <label for="btn-add-address" class="btn btn-primary">Add</label>
+            </div>
+        </div>
+    </div>
+</div>

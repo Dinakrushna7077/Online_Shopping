@@ -1,0 +1,1353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OnlineShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="a_id" />
+          </Key>
+          <Property Name="a_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar(max)" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contact" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cancel_Order">
+          <Key>
+            <PropertyRef Name="cancel_id" />
+          </Key>
+          <Property Name="cancel_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_id" Type="int" Nullable="false" />
+          <Property Name="od_id" Type="int" Nullable="false" />
+          <Property Name="cancel_reason" Type="varchar(max)" Nullable="false" />
+          <Property Name="cancel_dt" Type="date" Nullable="false" />
+          <Property Name="cancel_status" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="cat_id" />
+          </Key>
+          <Property Name="cat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="adm_id" Type="int" Nullable="false" />
+          <Property Name="image" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="my_cart">
+          <Key>
+            <PropertyRef Name="cart_id" />
+          </Key>
+          <Property Name="cart_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="u_id" Type="int" Nullable="false" />
+          <Property Name="p_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="total_price" Type="float" Nullable="false" />
+          <Property Name="added_date" Type="date" />
+          <Property Name="cart_statu" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order_Details">
+          <Key>
+            <PropertyRef Name="od_id" />
+          </Key>
+          <Property Name="od_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="o_id" Type="int" />
+          <Property Name="p_id" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="price" Type="float" />
+          <Property Name="mrp" Type="float" />
+          <Property Name="discount" Type="float" />
+          <Property Name="order_status" Type="varchar" MaxLength="20" />
+          <Property Name="action_dt" Type="date" />
+        </EntityType>
+        <EntityType Name="Order_mst">
+          <Key>
+            <PropertyRef Name="o_id" />
+          </Key>
+          <Property Name="o_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="u_id" Type="int" />
+          <Property Name="Add_id" Type="int" />
+          <Property Name="order_dt" Type="date" />
+          <Property Name="total_amount" Type="float" />
+        </EntityType>
+        <EntityType Name="product_mst">
+          <Key>
+            <PropertyRef Name="p_id" />
+          </Key>
+          <Property Name="p_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="p_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="p_status" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="p_desc" Type="varchar(max)" Nullable="false" />
+          <Property Name="image" Type="varchar(max)" Nullable="false" />
+          <Property Name="u_id" Type="int" Nullable="false" />
+          <Property Name="c_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="discount" Type="int" Nullable="false" />
+          <Property Name="added_date" Type="date" />
+          <Property Name="brand" Type="varchar" MaxLength="50" />
+          <Property Name="img2" Type="nvarchar(max)" />
+          <Property Name="img3" Type="nvarchar(max)" />
+          <Property Name="img4" Type="nvarchar(max)" />
+          <Property Name="img5" Type="nvarchar(max)" />
+          <Property Name="rating" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User_Address">
+          <Key>
+            <PropertyRef Name="Add_id" />
+          </Key>
+          <Property Name="Add_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_id" Type="int" Nullable="false" />
+          <Property Name="Address_line1" Type="varchar(max)" Nullable="false" />
+          <Property Name="Address_line2" Type="varchar(max)" />
+          <Property Name="Add_Type" Type="varchar(max)" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Dist" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PIN" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Mobile" Type="bigint" Nullable="false" />
+          <Property Name="Alt_Mobile" Type="bigint" />
+        </EntityType>
+        <EntityType Name="user_mst">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar(max)" Nullable="false" />
+          <Property Name="contact" Type="bigint" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'OnlineShopping.dbo.Address_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Address_View">
+          <Key>
+            <PropertyRef Name="Add_id" />
+            <PropertyRef Name="Address_line1" />
+            <PropertyRef Name="Mobile" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="PIN" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Dist" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Add_Type" />
+            <PropertyRef Name="u_id" />
+            <PropertyRef Name="cart_statu" />
+            <PropertyRef Name="Expr1" />
+          </Key>
+          <Property Name="Add_id" Type="int" Nullable="false" />
+          <Property Name="Address_line1" Type="varchar(max)" Nullable="false" />
+          <Property Name="Alt_Mobile" Type="bigint" />
+          <Property Name="Mobile" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PIN" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Dist" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Add_Type" Type="varchar(max)" Nullable="false" />
+          <Property Name="TotalPrice" Type="float" />
+          <Property Name="u_id" Type="int" Nullable="false" />
+          <Property Name="cart_statu" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Expr1" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'OnlineShopping.dbo.MyCartView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MyCartView">
+          <Key>
+            <PropertyRef Name="p_id" />
+            <PropertyRef Name="p_name" />
+            <PropertyRef Name="price" />
+            <PropertyRef Name="p_desc" />
+            <PropertyRef Name="image" />
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="p_id" Type="int" Nullable="false" />
+          <Property Name="p_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="p_desc" Type="varchar(max)" Nullable="false" />
+          <Property Name="image" Type="varchar(max)" Nullable="false" />
+          <Property Name="discount" Type="int" />
+          <Property Name="rating" Type="float" />
+          <Property Name="Expr1" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="total_price" Type="float" />
+          <Property Name="u_id" Type="int" Nullable="false" />
+          <Property Name="cart_statu" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'OnlineShopping.dbo.Order_Details_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Order_Details_View">
+          <Key>
+            <PropertyRef Name="od_id" />
+            <PropertyRef Name="p_name" />
+            <PropertyRef Name="p_desc" />
+            <PropertyRef Name="image" />
+            <PropertyRef Name="rating" />
+            <PropertyRef Name="Address_line1" />
+            <PropertyRef Name="Add_Type" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="PIN" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Mobile" />
+            <PropertyRef Name="Dist" />
+          </Key>
+          <Property Name="od_id" Type="int" Nullable="false" />
+          <Property Name="p_id" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="price" Type="float" />
+          <Property Name="mrp" Type="float" />
+          <Property Name="discount" Type="float" />
+          <Property Name="order_status" Type="varchar" MaxLength="20" />
+          <Property Name="action_dt" Type="date" />
+          <Property Name="p_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="p_desc" Type="varchar(max)" Nullable="false" />
+          <Property Name="image" Type="varchar(max)" Nullable="false" />
+          <Property Name="rating" Type="float" Nullable="false" />
+          <Property Name="Address_line1" Type="varchar(max)" Nullable="false" />
+          <Property Name="Address_line2" Type="varchar(max)" />
+          <Property Name="Add_Type" Type="varchar(max)" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PIN" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Mobile" Type="bigint" Nullable="false" />
+          <Property Name="Alt_Mobile" Type="bigint" />
+          <Property Name="Dist" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="u_id" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'OnlineShopping.dbo.Order_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Order_View">
+          <Key>
+            <PropertyRef Name="od_id" />
+            <PropertyRef Name="p_name" />
+            <PropertyRef Name="image" />
+            <PropertyRef Name="p_desc" />
+            <PropertyRef Name="rating" />
+            <PropertyRef Name="Address_line1" />
+            <PropertyRef Name="Add_Type" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Dist" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="PIN" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Mobile" />
+          </Key>
+          <Property Name="u_id" Type="int" />
+          <Property Name="od_id" Type="int" Nullable="false" />
+          <Property Name="p_id" Type="int" />
+          <Property Name="o_id" Type="int" />
+          <Property Name="p_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="image" Type="varchar(max)" Nullable="false" />
+          <Property Name="p_desc" Type="varchar(max)" Nullable="false" />
+          <Property Name="mrp" Type="float" />
+          <Property Name="price" Type="float" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="discount" Type="float" />
+          <Property Name="total_amount" Type="float" />
+          <Property Name="order_dt" Type="date" />
+          <Property Name="order_status" Type="varchar" MaxLength="20" />
+          <Property Name="rating" Type="float" Nullable="false" />
+          <Property Name="Add_id" Type="int" />
+          <Property Name="Address_line1" Type="varchar(max)" Nullable="false" />
+          <Property Name="Add_Type" Type="varchar(max)" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Dist" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PIN" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Mobile" Type="bigint" Nullable="false" />
+          <Property Name="Alt_Mobile" Type="bigint" />
+        </EntityType>
+        <Association Name="FK__Cancel_Or__od_id__3F115E1A">
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="1" />
+          <End Role="Cancel_Order" Type="Self.Cancel_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_Details">
+              <PropertyRef Name="od_id" />
+            </Principal>
+            <Dependent Role="Cancel_Order">
+              <PropertyRef Name="od_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cancel_Ord__U_id__3E1D39E1">
+          <End Role="user_mst" Type="Self.user_mst" Multiplicity="1" />
+          <End Role="Cancel_Order" Type="Self.Cancel_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_mst">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="Cancel_Order">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__category__adm_id__3A81B327">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="category" Type="Self.category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="a_id" />
+            </Principal>
+            <Dependent Role="category">
+              <PropertyRef Name="adm_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__my_cart__p_id__787EE5A0">
+          <End Role="product_mst" Type="Self.product_mst" Multiplicity="1" />
+          <End Role="my_cart" Type="Self.my_cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product_mst">
+              <PropertyRef Name="p_id" />
+            </Principal>
+            <Dependent Role="my_cart">
+              <PropertyRef Name="p_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__my_cart__u_id__778AC167">
+          <End Role="user_mst" Type="Self.user_mst" Multiplicity="1" />
+          <End Role="my_cart" Type="Self.my_cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_mst">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="my_cart">
+              <PropertyRef Name="u_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Deta__o_id__31B762FC">
+          <End Role="Order_mst" Type="Self.Order_mst" Multiplicity="0..1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_mst">
+              <PropertyRef Name="o_id" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="o_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Deta__p_id__32AB8735">
+          <End Role="product_mst" Type="Self.product_mst" Multiplicity="0..1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product_mst">
+              <PropertyRef Name="p_id" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="p_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_mst__Add_i__2EDAF651">
+          <End Role="User_Address" Type="Self.User_Address" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order_mst" Type="Self.Order_mst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Address">
+              <PropertyRef Name="Add_id" />
+            </Principal>
+            <Dependent Role="Order_mst">
+              <PropertyRef Name="Add_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_mst__u_id__2DE6D218">
+          <End Role="user_mst" Type="Self.user_mst" Multiplicity="0..1" />
+          <End Role="Order_mst" Type="Self.Order_mst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_mst">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="Order_mst">
+              <PropertyRef Name="u_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product_ms__c_id__412EB0B6">
+          <End Role="category" Type="Self.category" Multiplicity="1" />
+          <End Role="product_mst" Type="Self.product_mst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="cat_id" />
+            </Principal>
+            <Dependent Role="product_mst">
+              <PropertyRef Name="c_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product_ms__u_id__403A8C7D">
+          <End Role="user_mst" Type="Self.user_mst" Multiplicity="1" />
+          <End Role="product_mst" Type="Self.product_mst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_mst">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="product_mst">
+              <PropertyRef Name="u_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Addre__U_id__02084FDA">
+          <End Role="user_mst" Type="Self.user_mst" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Address" Type="Self.User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_mst">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineShoppingModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cancel_Order" EntityType="Self.Cancel_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="my_cart" EntityType="Self.my_cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Details" EntityType="Self.Order_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_mst" EntityType="Self.Order_mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product_mst" EntityType="Self.product_mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Address" EntityType="Self.User_Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_mst" EntityType="Self.user_mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Address_View" EntityType="Self.Address_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Address_View].[Add_id] AS [Add_id], 
+    [Address_View].[Address_line1] AS [Address_line1], 
+    [Address_View].[Alt_Mobile] AS [Alt_Mobile], 
+    [Address_View].[Mobile] AS [Mobile], 
+    [Address_View].[Name] AS [Name], 
+    [Address_View].[Country] AS [Country], 
+    [Address_View].[PIN] AS [PIN], 
+    [Address_View].[State] AS [State], 
+    [Address_View].[Dist] AS [Dist], 
+    [Address_View].[City] AS [City], 
+    [Address_View].[Add_Type] AS [Add_Type], 
+    [Address_View].[TotalPrice] AS [TotalPrice], 
+    [Address_View].[u_id] AS [u_id], 
+    [Address_View].[cart_statu] AS [cart_statu], 
+    [Address_View].[Expr1] AS [Expr1]
+    FROM [dbo].[Address_View] AS [Address_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MyCartView" EntityType="Self.MyCartView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MyCartView].[p_id] AS [p_id], 
+    [MyCartView].[p_name] AS [p_name], 
+    [MyCartView].[price] AS [price], 
+    [MyCartView].[p_desc] AS [p_desc], 
+    [MyCartView].[image] AS [image], 
+    [MyCartView].[discount] AS [discount], 
+    [MyCartView].[rating] AS [rating], 
+    [MyCartView].[Expr1] AS [Expr1], 
+    [MyCartView].[quantity] AS [quantity], 
+    [MyCartView].[total_price] AS [total_price], 
+    [MyCartView].[u_id] AS [u_id], 
+    [MyCartView].[cart_statu] AS [cart_statu]
+    FROM [dbo].[MyCartView] AS [MyCartView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Order_Details_View" EntityType="Self.Order_Details_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Order_Details_View].[od_id] AS [od_id], 
+    [Order_Details_View].[p_id] AS [p_id], 
+    [Order_Details_View].[quantity] AS [quantity], 
+    [Order_Details_View].[price] AS [price], 
+    [Order_Details_View].[mrp] AS [mrp], 
+    [Order_Details_View].[discount] AS [discount], 
+    [Order_Details_View].[order_status] AS [order_status], 
+    [Order_Details_View].[action_dt] AS [action_dt], 
+    [Order_Details_View].[p_name] AS [p_name], 
+    [Order_Details_View].[p_desc] AS [p_desc], 
+    [Order_Details_View].[image] AS [image], 
+    [Order_Details_View].[rating] AS [rating], 
+    [Order_Details_View].[Address_line1] AS [Address_line1], 
+    [Order_Details_View].[Address_line2] AS [Address_line2], 
+    [Order_Details_View].[Add_Type] AS [Add_Type], 
+    [Order_Details_View].[City] AS [City], 
+    [Order_Details_View].[State] AS [State], 
+    [Order_Details_View].[PIN] AS [PIN], 
+    [Order_Details_View].[Country] AS [Country], 
+    [Order_Details_View].[Name] AS [Name], 
+    [Order_Details_View].[Mobile] AS [Mobile], 
+    [Order_Details_View].[Alt_Mobile] AS [Alt_Mobile], 
+    [Order_Details_View].[Dist] AS [Dist], 
+    [Order_Details_View].[u_id] AS [u_id]
+    FROM [dbo].[Order_Details_View] AS [Order_Details_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Order_View" EntityType="Self.Order_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Order_View].[u_id] AS [u_id], 
+    [Order_View].[od_id] AS [od_id], 
+    [Order_View].[p_id] AS [p_id], 
+    [Order_View].[o_id] AS [o_id], 
+    [Order_View].[p_name] AS [p_name], 
+    [Order_View].[image] AS [image], 
+    [Order_View].[p_desc] AS [p_desc], 
+    [Order_View].[mrp] AS [mrp], 
+    [Order_View].[price] AS [price], 
+    [Order_View].[quantity] AS [quantity], 
+    [Order_View].[discount] AS [discount], 
+    [Order_View].[total_amount] AS [total_amount], 
+    [Order_View].[order_dt] AS [order_dt], 
+    [Order_View].[order_status] AS [order_status], 
+    [Order_View].[rating] AS [rating], 
+    [Order_View].[Add_id] AS [Add_id], 
+    [Order_View].[Address_line1] AS [Address_line1], 
+    [Order_View].[Add_Type] AS [Add_Type], 
+    [Order_View].[City] AS [City], 
+    [Order_View].[Dist] AS [Dist], 
+    [Order_View].[State] AS [State], 
+    [Order_View].[PIN] AS [PIN], 
+    [Order_View].[Country] AS [Country], 
+    [Order_View].[Name] AS [Name], 
+    [Order_View].[Mobile] AS [Mobile], 
+    [Order_View].[Alt_Mobile] AS [Alt_Mobile]
+    FROM [dbo].[Order_View] AS [Order_View]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Cancel_Or__od_id__3F115E1A" Association="Self.FK__Cancel_Or__od_id__3F115E1A">
+            <End Role="Order_Details" EntitySet="Order_Details" />
+            <End Role="Cancel_Order" EntitySet="Cancel_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cancel_Ord__U_id__3E1D39E1" Association="Self.FK__Cancel_Ord__U_id__3E1D39E1">
+            <End Role="user_mst" EntitySet="user_mst" />
+            <End Role="Cancel_Order" EntitySet="Cancel_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__category__adm_id__3A81B327" Association="Self.FK__category__adm_id__3A81B327">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="category" EntitySet="category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__my_cart__p_id__787EE5A0" Association="Self.FK__my_cart__p_id__787EE5A0">
+            <End Role="product_mst" EntitySet="product_mst" />
+            <End Role="my_cart" EntitySet="my_cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__my_cart__u_id__778AC167" Association="Self.FK__my_cart__u_id__778AC167">
+            <End Role="user_mst" EntitySet="user_mst" />
+            <End Role="my_cart" EntitySet="my_cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Deta__o_id__31B762FC" Association="Self.FK__Order_Deta__o_id__31B762FC">
+            <End Role="Order_mst" EntitySet="Order_mst" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Deta__p_id__32AB8735" Association="Self.FK__Order_Deta__p_id__32AB8735">
+            <End Role="product_mst" EntitySet="product_mst" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_mst__Add_i__2EDAF651" Association="Self.FK__Order_mst__Add_i__2EDAF651">
+            <End Role="User_Address" EntitySet="User_Address" />
+            <End Role="Order_mst" EntitySet="Order_mst" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_mst__u_id__2DE6D218" Association="Self.FK__Order_mst__u_id__2DE6D218">
+            <End Role="user_mst" EntitySet="user_mst" />
+            <End Role="Order_mst" EntitySet="Order_mst" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product_ms__c_id__412EB0B6" Association="Self.FK__product_ms__c_id__412EB0B6">
+            <End Role="category" EntitySet="category" />
+            <End Role="product_mst" EntitySet="product_mst" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product_ms__u_id__403A8C7D" Association="Self.FK__product_ms__u_id__403A8C7D">
+            <End Role="user_mst" EntitySet="user_mst" />
+            <End Role="product_mst" EntitySet="product_mst" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Addre__U_id__02084FDA" Association="Self.FK__User_Addre__U_id__02084FDA">
+            <End Role="user_mst" EntitySet="user_mst" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OnlineShoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="OnlineShopping" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="OnlineShoppingModel.Admin" />
+          <EntitySet Name="categories" EntityType="OnlineShoppingModel.category" />
+          <EntitySet Name="my_cart" EntityType="OnlineShoppingModel.my_cart" />
+          <EntitySet Name="product_mst" EntityType="OnlineShoppingModel.product_mst" />
+          <EntitySet Name="sysdiagrams" EntityType="OnlineShoppingModel.sysdiagram" />
+          <EntitySet Name="User_Address" EntityType="OnlineShoppingModel.User_Address" />
+          <EntitySet Name="user_mst" EntityType="OnlineShoppingModel.user_mst" />
+          <AssociationSet Name="FK__category__adm_id__3A81B327" Association="OnlineShoppingModel.FK__category__adm_id__3A81B327">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="category" EntitySet="categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product_ms__c_id__412EB0B6" Association="OnlineShoppingModel.FK__product_ms__c_id__412EB0B6">
+            <End Role="category" EntitySet="categories" />
+            <End Role="product_mst" EntitySet="product_mst" />
+          </AssociationSet>
+          <AssociationSet Name="FK__my_cart__p_id__787EE5A0" Association="OnlineShoppingModel.FK__my_cart__p_id__787EE5A0">
+            <End Role="product_mst" EntitySet="product_mst" />
+            <End Role="my_cart" EntitySet="my_cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__my_cart__u_id__778AC167" Association="OnlineShoppingModel.FK__my_cart__u_id__778AC167">
+            <End Role="user_mst" EntitySet="user_mst" />
+            <End Role="my_cart" EntitySet="my_cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product_ms__u_id__403A8C7D" Association="OnlineShoppingModel.FK__product_ms__u_id__403A8C7D">
+            <End Role="user_mst" EntitySet="user_mst" />
+            <End Role="product_mst" EntitySet="product_mst" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Addre__U_id__02084FDA" Association="OnlineShoppingModel.FK__User_Addre__U_id__02084FDA">
+            <End Role="user_mst" EntitySet="user_mst" />
+            <End Role="User_Address" EntitySet="User_Address" />
+          </AssociationSet>
+          <EntitySet Name="Address_View" EntityType="OnlineShoppingModel.Address_View" />
+          <EntitySet Name="MyCartViews" EntityType="OnlineShoppingModel.MyCartView" />
+          <EntitySet Name="Order_Details" EntityType="OnlineShoppingModel.Order_Details" />
+          <AssociationSet Name="FK__Order_Deta__p_id__32AB8735" Association="OnlineShoppingModel.FK__Order_Deta__p_id__32AB8735">
+            <End Role="product_mst" EntitySet="product_mst" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <EntitySet Name="Order_View" EntityType="OnlineShoppingModel.Order_View" />
+          <EntitySet Name="Order_mst" EntityType="OnlineShoppingModel.Order_mst" />
+          <AssociationSet Name="FK__Order_Deta__o_id__31B762FC" Association="OnlineShoppingModel.FK__Order_Deta__o_id__31B762FC">
+            <End Role="Order_mst" EntitySet="Order_mst" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_mst__Add_i__2EDAF651" Association="OnlineShoppingModel.FK__Order_mst__Add_i__2EDAF651">
+            <End Role="User_Address" EntitySet="User_Address" />
+            <End Role="Order_mst" EntitySet="Order_mst" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_mst__u_id__2DE6D218" Association="OnlineShoppingModel.FK__Order_mst__u_id__2DE6D218">
+            <End Role="user_mst" EntitySet="user_mst" />
+            <End Role="Order_mst" EntitySet="Order_mst" />
+          </AssociationSet>
+          <EntitySet Name="Order_Details_View" EntityType="OnlineShoppingModel.Order_Details_View" />
+          <EntitySet Name="Cancel_Order" EntityType="OnlineShoppingModel.Cancel_Order" />
+          <AssociationSet Name="FK__Cancel_Or__od_id__3F115E1A" Association="OnlineShoppingModel.FK__Cancel_Or__od_id__3F115E1A">
+            <End Role="Order_Details" EntitySet="Order_Details" />
+            <End Role="Cancel_Order" EntitySet="Cancel_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cancel_Ord__U_id__3E1D39E1" Association="OnlineShoppingModel.FK__Cancel_Ord__U_id__3E1D39E1">
+            <End Role="user_mst" EntitySet="user_mst" />
+            <End Role="Cancel_Order" EntitySet="Cancel_Order" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="a_id" />
+          </Key>
+          <Property Name="a_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contact" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="categories" Relationship="OnlineShoppingModel.FK__category__adm_id__3A81B327" FromRole="Admin" ToRole="category" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="cat_id" />
+          </Key>
+          <Property Name="cat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adm_id" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Admin" Relationship="OnlineShoppingModel.FK__category__adm_id__3A81B327" FromRole="category" ToRole="Admin" />
+          <NavigationProperty Name="product_mst" Relationship="OnlineShoppingModel.FK__product_ms__c_id__412EB0B6" FromRole="category" ToRole="product_mst" />
+        </EntityType>
+        <EntityType Name="my_cart">
+          <Key>
+            <PropertyRef Name="cart_id" />
+          </Key>
+          <Property Name="cart_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="u_id" Type="Int32" Nullable="false" />
+          <Property Name="p_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="total_price" Type="Double" Nullable="false" />
+          <Property Name="added_date" Type="DateTime" Precision="0" />
+          <Property Name="cart_statu" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="product_mst" Relationship="OnlineShoppingModel.FK__my_cart__p_id__787EE5A0" FromRole="my_cart" ToRole="product_mst" />
+          <NavigationProperty Name="user_mst" Relationship="OnlineShoppingModel.FK__my_cart__u_id__778AC167" FromRole="my_cart" ToRole="user_mst" />
+        </EntityType>
+        <EntityType Name="product_mst">
+          <Key>
+            <PropertyRef Name="p_id" />
+          </Key>
+          <Property Name="p_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="p_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="p_status" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="p_desc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="u_id" Type="Int32" Nullable="false" />
+          <Property Name="c_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="discount" Type="Int32" Nullable="false" />
+          <Property Name="added_date" Type="DateTime" Precision="0" />
+          <Property Name="brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="img2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="img3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="img4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="img5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="rating" Type="Double" Nullable="false" />
+          <NavigationProperty Name="category" Relationship="OnlineShoppingModel.FK__product_ms__c_id__412EB0B6" FromRole="product_mst" ToRole="category" />
+          <NavigationProperty Name="my_cart" Relationship="OnlineShoppingModel.FK__my_cart__p_id__787EE5A0" FromRole="product_mst" ToRole="my_cart" />
+          <NavigationProperty Name="user_mst" Relationship="OnlineShoppingModel.FK__product_ms__u_id__403A8C7D" FromRole="product_mst" ToRole="user_mst" />
+          <NavigationProperty Name="Order_Details" Relationship="OnlineShoppingModel.FK__Order_Deta__p_id__32AB8735" FromRole="product_mst" ToRole="Order_Details" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User_Address">
+          <Key>
+            <PropertyRef Name="Add_id" />
+          </Key>
+          <Property Name="Add_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_id" Type="Int32" Nullable="false" />
+          <Property Name="Address_line1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address_line2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Add_Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Dist" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PIN" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <Property Name="Alt_Mobile" Type="Int64" />
+          <NavigationProperty Name="user_mst" Relationship="OnlineShoppingModel.FK__User_Addre__U_id__02084FDA" FromRole="User_Address" ToRole="user_mst" />
+          <NavigationProperty Name="Order_mst" Relationship="OnlineShoppingModel.FK__Order_mst__Add_i__2EDAF651" FromRole="User_Address" ToRole="Order_mst" />
+        </EntityType>
+        <EntityType Name="user_mst">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="contact" Type="Int64" Nullable="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="my_cart" Relationship="OnlineShoppingModel.FK__my_cart__u_id__778AC167" FromRole="user_mst" ToRole="my_cart" />
+          <NavigationProperty Name="product_mst" Relationship="OnlineShoppingModel.FK__product_ms__u_id__403A8C7D" FromRole="user_mst" ToRole="product_mst" />
+          <NavigationProperty Name="User_Address" Relationship="OnlineShoppingModel.FK__User_Addre__U_id__02084FDA" FromRole="user_mst" ToRole="User_Address" />
+          <NavigationProperty Name="Order_mst" Relationship="OnlineShoppingModel.FK__Order_mst__u_id__2DE6D218" FromRole="user_mst" ToRole="Order_mst" />
+          <NavigationProperty Name="Cancel_Order" Relationship="OnlineShoppingModel.FK__Cancel_Ord__U_id__3E1D39E1" FromRole="user_mst" ToRole="Cancel_Order" />
+        </EntityType>
+        <Association Name="FK__category__adm_id__3A81B327">
+          <End Type="OnlineShoppingModel.Admin" Role="Admin" Multiplicity="1" />
+          <End Type="OnlineShoppingModel.category" Role="category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="a_id" />
+            </Principal>
+            <Dependent Role="category">
+              <PropertyRef Name="adm_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product_ms__c_id__412EB0B6">
+          <End Type="OnlineShoppingModel.category" Role="category" Multiplicity="1" />
+          <End Type="OnlineShoppingModel.product_mst" Role="product_mst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="cat_id" />
+            </Principal>
+            <Dependent Role="product_mst">
+              <PropertyRef Name="c_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__my_cart__p_id__787EE5A0">
+          <End Type="OnlineShoppingModel.product_mst" Role="product_mst" Multiplicity="1" />
+          <End Type="OnlineShoppingModel.my_cart" Role="my_cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product_mst">
+              <PropertyRef Name="p_id" />
+            </Principal>
+            <Dependent Role="my_cart">
+              <PropertyRef Name="p_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__my_cart__u_id__778AC167">
+          <End Type="OnlineShoppingModel.user_mst" Role="user_mst" Multiplicity="1" />
+          <End Type="OnlineShoppingModel.my_cart" Role="my_cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_mst">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="my_cart">
+              <PropertyRef Name="u_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product_ms__u_id__403A8C7D">
+          <End Type="OnlineShoppingModel.user_mst" Role="user_mst" Multiplicity="1" />
+          <End Type="OnlineShoppingModel.product_mst" Role="product_mst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_mst">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="product_mst">
+              <PropertyRef Name="u_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Addre__U_id__02084FDA">
+          <End Type="OnlineShoppingModel.user_mst" Role="user_mst" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="OnlineShoppingModel.User_Address" Role="User_Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_mst">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="User_Address">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Address_View">
+          <Key>
+            <PropertyRef Name="Add_id" />
+            <PropertyRef Name="Address_line1" />
+            <PropertyRef Name="Mobile" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="PIN" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="Dist" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Add_Type" />
+            <PropertyRef Name="u_id" />
+            <PropertyRef Name="cart_statu" />
+            <PropertyRef Name="Expr1" />
+          </Key>
+          <Property Name="Add_id" Type="Int32" Nullable="false" />
+          <Property Name="Address_line1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Alt_Mobile" Type="Int64" />
+          <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PIN" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Dist" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Add_Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TotalPrice" Type="Double" />
+          <Property Name="u_id" Type="Int32" Nullable="false" />
+          <Property Name="cart_statu" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Expr1" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MyCartView">
+          <Key>
+            <PropertyRef Name="p_id" />
+            <PropertyRef Name="p_name" />
+            <PropertyRef Name="price" />
+            <PropertyRef Name="p_desc" />
+            <PropertyRef Name="image" />
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="p_id" Type="Int32" Nullable="false" />
+          <Property Name="p_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="p_desc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="discount" Type="Int32" />
+          <Property Name="rating" Type="Double" />
+          <Property Name="Expr1" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="total_price" Type="Double" />
+          <Property Name="u_id" Type="Int32" Nullable="false" />
+          <Property Name="cart_statu" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Order_Details">
+          <Key>
+            <PropertyRef Name="od_id" />
+          </Key>
+          <Property Name="od_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="o_id" Type="Int32" />
+          <Property Name="p_id" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="price" Type="Double" />
+          <Property Name="mrp" Type="Double" />
+          <Property Name="discount" Type="Double" />
+          <NavigationProperty Name="product_mst" Relationship="OnlineShoppingModel.FK__Order_Deta__p_id__32AB8735" FromRole="Order_Details" ToRole="product_mst" />
+          <Property Name="order_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Order_mst" Relationship="OnlineShoppingModel.FK__Order_Deta__o_id__31B762FC" FromRole="Order_Details" ToRole="Order_mst" />
+          <Property Name="action_dt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Cancel_Order" Relationship="OnlineShoppingModel.FK__Cancel_Or__od_id__3F115E1A" FromRole="Order_Details" ToRole="Cancel_Order" />
+        </EntityType>
+        <Association Name="FK__Order_Deta__p_id__32AB8735">
+          <End Type="OnlineShoppingModel.product_mst" Role="product_mst" Multiplicity="0..1" />
+          <End Type="OnlineShoppingModel.Order_Details" Role="Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product_mst">
+              <PropertyRef Name="p_id" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="p_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Order_View">
+          <Key>
+            <PropertyRef Name="p_name" />
+            <PropertyRef Name="p_desc" />
+            <PropertyRef Name="image" />
+            <PropertyRef Name="rating" />
+            <PropertyRef Name="od_id" />
+            <PropertyRef Name="Address_line1" />
+            <PropertyRef Name="Add_Type" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Dist" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="PIN" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Mobile" />
+          </Key>
+          <Property Name="order_dt" Type="DateTime" Precision="0" />
+          <Property Name="p_id" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="price" Type="Double" />
+          <Property Name="mrp" Type="Double" />
+          <Property Name="discount" Type="Double" />
+          <Property Name="u_id" Type="Int32" />
+          <Property Name="p_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="p_desc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="total_amount" Type="Double" />
+          <Property Name="order_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="rating" Type="Double" Nullable="false" />
+          <Property Name="od_id" Type="Int32" Nullable="false" />
+          <Property Name="o_id" Type="Int32" />
+          <Property Name="Add_id" Type="Int32" />
+          <Property Name="Address_line1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Add_Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Dist" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PIN" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <Property Name="Alt_Mobile" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Order_mst">
+          <Key>
+            <PropertyRef Name="o_id" />
+          </Key>
+          <Property Name="o_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="u_id" Type="Int32" />
+          <Property Name="Add_id" Type="Int32" />
+          <Property Name="order_dt" Type="DateTime" Precision="0" />
+          <Property Name="total_amount" Type="Double" />
+          <NavigationProperty Name="Order_Details" Relationship="OnlineShoppingModel.FK__Order_Deta__o_id__31B762FC" FromRole="Order_mst" ToRole="Order_Details" />
+          <NavigationProperty Name="User_Address" Relationship="OnlineShoppingModel.FK__Order_mst__Add_i__2EDAF651" FromRole="Order_mst" ToRole="User_Address" />
+          <NavigationProperty Name="user_mst" Relationship="OnlineShoppingModel.FK__Order_mst__u_id__2DE6D218" FromRole="Order_mst" ToRole="user_mst" />
+        </EntityType>
+        <Association Name="FK__Order_Deta__o_id__31B762FC">
+          <End Type="OnlineShoppingModel.Order_mst" Role="Order_mst" Multiplicity="0..1" />
+          <End Type="OnlineShoppingModel.Order_Details" Role="Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_mst">
+              <PropertyRef Name="o_id" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="o_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_mst__Add_i__2EDAF651">
+          <End Type="OnlineShoppingModel.User_Address" Role="User_Address" Multiplicity="0..1" />
+          <End Type="OnlineShoppingModel.Order_mst" Role="Order_mst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Address">
+              <PropertyRef Name="Add_id" />
+            </Principal>
+            <Dependent Role="Order_mst">
+              <PropertyRef Name="Add_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_mst__u_id__2DE6D218">
+          <End Type="OnlineShoppingModel.user_mst" Role="user_mst" Multiplicity="0..1" />
+          <End Type="OnlineShoppingModel.Order_mst" Role="Order_mst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_mst">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="Order_mst">
+              <PropertyRef Name="u_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Order_Details_View">
+          <Key>
+            <PropertyRef Name="od_id" />
+            <PropertyRef Name="p_name" />
+            <PropertyRef Name="p_desc" />
+            <PropertyRef Name="image" />
+            <PropertyRef Name="rating" />
+            <PropertyRef Name="Address_line1" />
+            <PropertyRef Name="Add_Type" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="PIN" />
+            <PropertyRef Name="Country" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Mobile" />
+            <PropertyRef Name="Dist" />
+          </Key>
+          <Property Name="od_id" Type="Int32" Nullable="false" />
+          <Property Name="p_id" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="price" Type="Double" />
+          <Property Name="mrp" Type="Double" />
+          <Property Name="discount" Type="Double" />
+          <Property Name="order_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="action_dt" Type="DateTime" Precision="0" />
+          <Property Name="p_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="p_desc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="rating" Type="Double" Nullable="false" />
+          <Property Name="Address_line1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address_line2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Add_Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PIN" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <Property Name="Alt_Mobile" Type="Int64" />
+          <Property Name="Dist" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="u_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Cancel_Order">
+          <Key>
+            <PropertyRef Name="cancel_id" />
+          </Key>
+          <Property Name="cancel_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_id" Type="Int32" Nullable="false" />
+          <Property Name="od_id" Type="Int32" Nullable="false" />
+          <Property Name="cancel_reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cancel_dt" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cancel_status" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Order_Details" Relationship="OnlineShoppingModel.FK__Cancel_Or__od_id__3F115E1A" FromRole="Cancel_Order" ToRole="Order_Details" />
+          <NavigationProperty Name="user_mst" Relationship="OnlineShoppingModel.FK__Cancel_Ord__U_id__3E1D39E1" FromRole="Cancel_Order" ToRole="user_mst" />
+        </EntityType>
+        <Association Name="FK__Cancel_Or__od_id__3F115E1A">
+          <End Type="OnlineShoppingModel.Order_Details" Role="Order_Details" Multiplicity="1" />
+          <End Type="OnlineShoppingModel.Cancel_Order" Role="Cancel_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order_Details">
+              <PropertyRef Name="od_id" />
+            </Principal>
+            <Dependent Role="Cancel_Order">
+              <PropertyRef Name="od_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cancel_Ord__U_id__3E1D39E1">
+          <End Type="OnlineShoppingModel.user_mst" Role="user_mst" Multiplicity="1" />
+          <End Type="OnlineShoppingModel.Cancel_Order" Role="Cancel_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_mst">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="Cancel_Order">
+              <PropertyRef Name="U_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OnlineShoppingModelStoreContainer" CdmEntityContainer="OnlineShopping">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="a_id" ColumnName="a_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="adm_id" ColumnName="adm_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="my_cart">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.my_cart">
+              <MappingFragment StoreEntitySet="my_cart">
+                <ScalarProperty Name="cart_statu" ColumnName="cart_statu" />
+                <ScalarProperty Name="added_date" ColumnName="added_date" />
+                <ScalarProperty Name="total_price" ColumnName="total_price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="p_id" ColumnName="p_id" />
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="cart_id" ColumnName="cart_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product_mst">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.product_mst">
+              <MappingFragment StoreEntitySet="product_mst">
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="img5" ColumnName="img5" />
+                <ScalarProperty Name="img4" ColumnName="img4" />
+                <ScalarProperty Name="img3" ColumnName="img3" />
+                <ScalarProperty Name="img2" ColumnName="img2" />
+                <ScalarProperty Name="brand" ColumnName="brand" />
+                <ScalarProperty Name="added_date" ColumnName="added_date" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="c_id" ColumnName="c_id" />
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="p_desc" ColumnName="p_desc" />
+                <ScalarProperty Name="p_status" ColumnName="p_status" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="p_id" ColumnName="p_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Address">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.User_Address">
+              <MappingFragment StoreEntitySet="User_Address">
+                <ScalarProperty Name="Alt_Mobile" ColumnName="Alt_Mobile" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Dist" ColumnName="Dist" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Add_Type" ColumnName="Add_Type" />
+                <ScalarProperty Name="Address_line2" ColumnName="Address_line2" />
+                <ScalarProperty Name="Address_line1" ColumnName="Address_line1" />
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="Add_id" ColumnName="Add_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_mst">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.user_mst">
+              <MappingFragment StoreEntitySet="user_mst">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Address_View">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.Address_View">
+              <MappingFragment StoreEntitySet="Address_View">
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="cart_statu" ColumnName="cart_statu" />
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Add_Type" ColumnName="Add_Type" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Dist" ColumnName="Dist" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Alt_Mobile" ColumnName="Alt_Mobile" />
+                <ScalarProperty Name="Address_line1" ColumnName="Address_line1" />
+                <ScalarProperty Name="Add_id" ColumnName="Add_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MyCartViews">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.MyCartView">
+              <MappingFragment StoreEntitySet="MyCartView">
+                <ScalarProperty Name="cart_statu" ColumnName="cart_statu" />
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="total_price" ColumnName="total_price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="p_desc" ColumnName="p_desc" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="p_id" ColumnName="p_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Details">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.Order_Details">
+              <MappingFragment StoreEntitySet="Order_Details">
+                <ScalarProperty Name="action_dt" ColumnName="action_dt" />
+                <ScalarProperty Name="order_status" ColumnName="order_status" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="mrp" ColumnName="mrp" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="p_id" ColumnName="p_id" />
+                <ScalarProperty Name="o_id" ColumnName="o_id" />
+                <ScalarProperty Name="od_id" ColumnName="od_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_View">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.Order_View">
+              <MappingFragment StoreEntitySet="Order_View">
+                <ScalarProperty Name="Alt_Mobile" ColumnName="Alt_Mobile" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Dist" ColumnName="Dist" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Add_Type" ColumnName="Add_Type" />
+                <ScalarProperty Name="Address_line1" ColumnName="Address_line1" />
+                <ScalarProperty Name="Add_id" ColumnName="Add_id" />
+                <ScalarProperty Name="o_id" ColumnName="o_id" />
+                <ScalarProperty Name="od_id" ColumnName="od_id" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="order_status" ColumnName="order_status" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="p_desc" ColumnName="p_desc" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="mrp" ColumnName="mrp" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="p_id" ColumnName="p_id" />
+                <ScalarProperty Name="order_dt" ColumnName="order_dt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_mst">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.Order_mst">
+              <MappingFragment StoreEntitySet="Order_mst">
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="order_dt" ColumnName="order_dt" />
+                <ScalarProperty Name="Add_id" ColumnName="Add_id" />
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="o_id" ColumnName="o_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Details_View">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.Order_Details_View">
+              <MappingFragment StoreEntitySet="Order_Details_View">
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="Dist" ColumnName="Dist" />
+                <ScalarProperty Name="Alt_Mobile" ColumnName="Alt_Mobile" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Add_Type" ColumnName="Add_Type" />
+                <ScalarProperty Name="Address_line2" ColumnName="Address_line2" />
+                <ScalarProperty Name="Address_line1" ColumnName="Address_line1" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="p_desc" ColumnName="p_desc" />
+                <ScalarProperty Name="p_name" ColumnName="p_name" />
+                <ScalarProperty Name="action_dt" ColumnName="action_dt" />
+                <ScalarProperty Name="order_status" ColumnName="order_status" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="mrp" ColumnName="mrp" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="p_id" ColumnName="p_id" />
+                <ScalarProperty Name="od_id" ColumnName="od_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cancel_Order">
+            <EntityTypeMapping TypeName="OnlineShoppingModel.Cancel_Order">
+              <MappingFragment StoreEntitySet="Cancel_Order">
+                <ScalarProperty Name="cancel_status" ColumnName="cancel_status" />
+                <ScalarProperty Name="cancel_dt" ColumnName="cancel_dt" />
+                <ScalarProperty Name="cancel_reason" ColumnName="cancel_reason" />
+                <ScalarProperty Name="od_id" ColumnName="od_id" />
+                <ScalarProperty Name="U_id" ColumnName="U_id" />
+                <ScalarProperty Name="cancel_id" ColumnName="cancel_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

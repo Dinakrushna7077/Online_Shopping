@@ -1,0 +1,90 @@
+﻿@using Online_Shoping.Models;
+@model user_mst
+
+@{
+    ViewBag.Title = "UserLogin";
+}
+
+
+
+<html>
+<head>
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="~/Content/Site.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex flex-column vh-100 w-100 align-items-center justify-content-center containerr">
+            @using (Html.BeginForm("UserLogin", "User", new { @class = "p-4" }))
+            {
+
+
+                <div class="text-center"><h2> User Login</h2></div><br />
+
+                <div class="d-flex flex-column  mycls">
+                    <div class="text-center">
+                    <p class="text-danger">
+                        @Html.ValidationMessageFor(x => x.email)<br />
+                        @Html.ValidationMessageFor(x => x.password)
+                    </p>
+                </div>
+
+                    <div class="d-flex align-items-center justify-content-center flex-column">
+                        <div class="d-flex justify-content-evenly">
+                            <div class="p-2 m-2 left">
+
+                                <div>
+                                    @Html.LabelFor(x => x.email) &nbsp; <span>*</span>
+                                    
+                                </div>
+                                <div>
+                                    @Html.LabelFor(x => x.password) &nbsp; <span>*</span>
+                                    
+                                </div>
+
+
+
+                            </div>
+                            <div class="m-2 p-2 right">
+                                <div class="mt-2">
+
+                                    @Html.EditorFor(x => x.email, new { htmlAttributes = new { @class = "form-control", @placeholder = "g-mail" } })
+                                </div>
+                                <div class="mt-2">
+                                    @Html.EditorFor(x => x.password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-2 text-center">
+                        <button class="btn btn-primary">Login</button>
+                    </div>
+                </div>
+
+
+
+
+
+                @*<div class="d-flex flex-column p-5  mycls">
+                <div class="p-2">
+                    <p class="text-danger">@TempData["Msg"]</p>
+                    <br />
+
+
+                </div>
+                <div class="p-2">
+                    <br />
+
+
+
+                </div><br />
+                <div class="p-2 text-center">
+                    <button class="btn btn-primary">Login</button>
+                </div>
+            </div>*@
+            }
+        </div>
+    </div>
+</body>
+</html>

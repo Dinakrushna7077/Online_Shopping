@@ -1,0 +1,244 @@
+﻿@model IEnumerable<Online_Shoping.Models.AddressMng>
+
+@{
+    ViewBag.Title = "DeliveryAddress";
+    
+}
+
+
+<html>
+<head>
+    <title>View Product</title>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <style>
+        body {
+            background-color: aliceblue;
+        }
+
+        .containerrr {
+            display: flex;
+            height: 100%;
+            width: 98%;
+            padding: 2rem 0 2rem 0;
+        }
+
+        .left-cont {
+            /*height: 1200px;*/
+            width: 60%;
+            background-color: white;
+            box-shadow: 0 8px 6px -6px black;
+        }
+
+        .right-cont {
+            /*margin-bottom: 1rem;*/
+            height: 16rem;
+            width: 40%;
+            background-color: aliceblue;
+            margin-left: 0.6rem;
+            position: sticky;
+            top: 60px;
+            box-shadow: 0 8px 6px -6px black;
+        }
+
+        .left-cont .loopp {
+            font-size: 15px;
+            display: flex;
+            height: 13rem;
+            width: 100%;
+            background-color: white;
+            margin-bottom: 1rem;
+        }
+
+        .left-element {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 25%;
+            align-items: center;
+            justify-content: space-around;
+            /*background-color: white;*/
+        }
+
+        .right-element {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            align-items: start;
+            justify-content: space-around;
+            /*background-color: yellow;*/
+            padding: 1rem;
+        }
+
+
+
+        .address {
+            height: 6rem;
+            width: 100%;
+            position: sticky;
+            bottom: 0rem;
+            background-color: white;
+            /*box-shadow: 0 0 4px black;*/
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+        }
+
+
+
+        #btn-buy, #btn-add {
+            padding: 0.5rem;
+            background-color: forestgreen;
+            border-radius: 0.3rem;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+        }
+            #btn-buy{
+                background-color:orange;
+            }
+
+            .btn-edit {
+                padding: 0.2rem;
+                background-color: deepskyblue;
+                border-radius: 0.3rem;
+                font-weight: 600;
+                color: white;
+                text-align: center;
+                margin-bottom: 0.05rem;
+            }
+
+        .btn-remove {
+            padding: 0.2rem;
+            background-color: orangered;
+            border-radius: 0.3rem;
+            font-weight: 500;
+            color: white;
+            text-align: center;
+            margin-top: 0.05rem;
+        }
+
+        #btn-back {
+            padding: 0.5rem;
+            background-color: lightgray;
+            border-radius: 0.3rem;
+            font-weight: 500;
+            color: black;
+        }
+
+
+        .details {
+            font-size: 13px;
+        }
+
+        .right-cont {
+            background-color: white;
+        }
+
+        .btn-cont {
+            display: flex;
+            height: 6rem;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem;
+            border-top: 0.01rem dashed #c7c7c7;
+            
+        }
+
+        .add-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .add-left {
+            display: flex;
+            width: 30rem;
+        }
+
+        .add-cont {
+            padding: 0 .5rem 0 .3rem;
+        }
+
+        .add-type {
+            display: inline;
+            border: 1px solid black;
+            padding: 0.2rem;
+            background-color: rgb(128, 128, 128,0.2);
+            border-radius: 0.2rem;
+        }
+        .add-header{
+            border-bottom:1px dashed lightgray;
+            padding:1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="containerrr">
+        <div class="left-cont">
+            <div class="p-3 add-header">
+                <h5>Delivery Address :</h5>
+            </div>
+            @using (Html.BeginForm())
+            {
+                foreach (var address in Model)
+                {
+
+                    <div class="address">
+                        <div class="add-left">
+                            <div>
+                                @Html.RadioButtonFor(model => model.FirstOrDefault().Add_Id, address.Add_Id, new {id="add-"+address.Add_Id, add_id = @address.Add_Id })
+
+                            </div>
+                            <label for="add-@address.Add_Id" class="add-cont">
+                                <b>@address.Name </b>
+                                <b class="add-type"> @address.Add_Type</b><br />
+                                @address.Address
+                                @address.PIN, @address.City, @address.Dist, @address.State,  @address.Country<br />
+                            </label>
+                        </div>
+                        <div class="add-right">
+                            @Html.ActionLink("Edit", "EditAddress", "User", new { add_id = address.Add_Id }, new { @class = "btn-edit" })
+                            @*@Html.ActionLink("Remove", "DeleteAddress", "User", new { add_id = address.Add_Id }, new { @class = "btn-remove" })*@
+                        </div>
+                    </div>
+
+                }
+                <button id="cont" class="invisible"></button>
+            }
+
+            <div class="btn-cont">
+
+                @if (Model.Count() > 0)
+                {
+                    <div> @Html.ActionLink("Add Address", "AddNewAddress", "User", new { id = "btn-add" })</div>
+                    <label for="cont" id = "btn-buy" >Continue</label>
+                }
+                else
+                {
+                    <div> @Html.ActionLink("Shop Now", "UserHome", "User", new { id = "btn-buy" })</div>
+                }
+            </div>
+        </div>
+        <div class="right-cont">
+            
+            <div class="add-header"><h5>Total Amount : ₹@Model.FirstOrDefault().TotalPrice.ToString("0,00.00")</h5></div>
+            <div class="d-flex flex-column justify-content-around m-3" style="height:7rem;">
+                <div>
+                    <input type="radio" id="cod" name="payment" /> <label for="cod">Cash On Delivery</label>
+                </div>
+                <div class="disabled">
+                    <input type="radio" id="upi" name="payment" disabled="disabled" /> <label for="upi">UPI</label>
+                </div>
+                <div><input type="radio" id="nb" name="payment" disabled="disabled" /> <label for="nb">Net Banking</label></div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

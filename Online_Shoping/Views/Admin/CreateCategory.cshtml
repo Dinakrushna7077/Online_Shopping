@@ -1,0 +1,43 @@
+﻿@using Online_Shoping.Models;
+@model category
+@{
+    ViewBag.Title = "CreateCat";
+}
+
+<html>
+<head>
+    <title>Add New Categoryes</title>
+    <link rel="stylesheet" href="~/Content/Site.css" />
+</head>
+<body>
+    @Html.Raw(TempData["Msg"])
+    <div class="container">
+        <div class="d-flex flex-column vh-100 w-100 align-items-center justify-content-center containerr">
+            @using (Html.BeginForm("CreateCategory", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+                <div class="text-center"><h2>New Category</h2></div>
+                <br />
+                <div class="d-flex flex-column p-5  mycls">
+                    <div class="p-2">
+
+                        @Html.LabelFor(x => x.name)<br />
+                        <p class="text-danger">@Html.ValidationMessageFor(x => x.name)</p>
+                        @Html.EditorFor(x => x.name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Category Name" } })
+                    </div>
+                    <div class="p-2">
+
+                        <p class="text-danger">@Html.ValidationMessageFor(x => x.File)</p>
+                        @Html.LabelFor(x => x.image)
+                        <input type="file" name="File" />
+
+                    </div><br />
+                    <div class="p-2 text-center">
+                        <button class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>
+

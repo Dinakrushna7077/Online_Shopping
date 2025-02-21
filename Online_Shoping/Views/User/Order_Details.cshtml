@@ -1,0 +1,203 @@
+﻿@model IEnumerable<Online_Shoping.Models.Order_Details_View>
+@{
+    ViewBag.Title = "Order_Details";
+    var order = Model.FirstOrDefault();
+    var discount_price = order.mrp - order.price;
+    var mrp = order.mrp * order.quantity;
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        .odd-container{
+            display:flex;
+            gap:1rem;
+        }
+        .od-left{
+            position:sticky;
+            top:60px;
+            background-color:gainsboro;
+            height:60%;
+            width:60%;
+        }
+        .od-right {
+            display:flex;
+            flex-direction:column;
+            width: 40%;
+            height: 80%;
+            gap:0.3rem;
+        }
+        .od-element{
+            background-color: gainsboro;
+            display:flex;
+            flex-direction:column;
+            gap:0.5rem;
+            padding-bottom:1rem;
+        }
+        #product-img{
+            height:10rem;
+        }
+        #price-details, #shipping-address {
+            color:#8b8b8b;
+            border-bottom: 1px solid #a9a9a9;
+            padding: 0.5rem 1rem 0.5rem 1rem;
+        }
+        .p-element{
+            padding:0.2rem 1rem 0 1rem;
+        }
+        #mobile{
+            font-weight:500;
+        }
+        #inv{
+            padding:0.5rem 1rem 0.5rem 1rem;
+            cursor:pointer;
+        }
+        #confirm-progress,#deliver-progress{
+            
+            height:0.6rem;
+            width:100px;            
+        }
+    </style>
+</head>
+<body>
+    <div class="odd-container">
+        <div class="od-left">
+            <div class="d-flex p-3 gap-5">
+                <img id="product-img" src="@Url.Content(order.image)" />
+                <div>
+                    <h4>@order.p_name</h4>
+                    <div>@order.p_desc.Substring(0, 40)</div>
+                    <div><b class="text-success">Price ₹@order.price </b></div>
+                    <div>Quantity : @order.quantity</div>
+                </div>
+            </div>
+            <div class="p-3">
+                @if (order.order_status.ToLower() != "canceled")
+                {
+                    <button onclick="Cancel()">Cancel</button>
+                    using (Html.BeginForm("CancelOrder", "User", FormMethod.Get))
+                    {
+                        <div id="cancel-container">
+                            @Html.Hidden("od_id", order.od_id)
+                            <input type="text" value="" id="reason" name="reason" placeholder="Enter reason">
+                            <button type="submit">Cancel Order</button>
+                        </div>
+                    }
+                }
+
+                @*<div id="cancel-container">
+            <input type="text" value="" id="reason">
+            <a id="cancel-order-link" href="#">Cancel Order</a>
+        </div>*@
+            </div>
+            <div class="d-flex align-items-center p-3 justify-content-center">
+                @if (order.order_status.ToLower() == "processing" || order.order_status.ToLower() == "pending")
+                {
+                    <div>@order.order_status <i class="fa-solid fa-hourglass-half"></i></div>
+                    <progress id="confirm-progress" value="2" max="100"></progress>
+                    <div>Delivered</div>
+                }
+                else if (order.order_status.ToLower() == "confirmed")
+                {
+                    <div>Confirmed<i class="fa-solid fa-square"></i></div>
+                    <progress id="confirm-progress" value="20" max="100"></progress>
+                    <div>Delivered</div>
+                }
+                else if (order.order_status.ToLower() == "canceled")
+                {
+                    <div>Confirmed</div>
+                    <progress id="confirm-progress" value="100" max="100"></progress>
+                    <div> <i class="fa-solid fa-rectangle-xmark"></i> Canceled</div>
+                }
+                else if (order.order_status.ToLower() == "out for delivery")
+                {
+                    <div>Confirmed</div>
+                    <progress id="confirm-progress" value="70" max="100"></progress>
+                    <div><i class="fa-solid fa-route"></i>Out For Delivery</div>
+                }
+                else if (order.order_status.ToLower() == "delivered")
+                {
+                    <div>Confirmed<i class="fa-solid fa-square"></i></div>
+                    <progress id="confirm-progress" value="100" max="100"></progress>
+                    <div>Delivered<i class="fa-solid fa-square"></i></div>
+                }
+                else
+                {
+                    <div>Confirmed</div>
+                    <progress id="confirm-progress" value="100" max="100"></progress>
+                    <div>@order.order_status</div>
+                }
+
+
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+
+                @if (order.order_status.ToLower() == "processing")
+                {
+                    <label> Your Order is  Under @order.order_status from @order.action_dt</label>
+                }
+                else if (order.order_status.ToLower() == "canceled")
+                {
+                    <label>Your Order is @order.order_status on @order.action_dt for Cancel Msg</label>
+                }
+                else
+                {
+                    <label>Your Order is @order.order_status on @order.action_dt </label>
+                }
+
+
+            </div>
+        </div>
+        <div class="od-right">
+            <div class="od-element">
+                <h5 id="price-details">Price Details :</h5>
+                <div class="p-element">MRP : <s>₹@mrp</s> &nbsp; &nbsp; &nbsp; &nbsp; <b class="text-primary">@order.discount % Off</b></div>
+                <div class="p-element">
+                    Discount : @discount_price
+                </div>
+                <div class="p-element">
+                    Delivery Charges : <s>₹29.00</s> &nbsp;&nbsp;&nbsp; <i class="text-success">free</i>
+                </div>
+                <div class="p-element">
+                    Total Price : @order.price
+                </div>
+            </div>
+            <div class="od-element">
+                <h5 id="shipping-address">Shipping Address</h5>
+                <div class="p-element"><b>@order.Name</b></div>
+                <div class="p-element">@order.Address_line1 </div>
+                @if (order.Address_line2 != null)
+                {
+                    <div class="p-element">@order.Address_line2 </div>
+                }
+                <div class="p-element">@order.City @order.Dist @order.State</div>
+                <div class="p-element">@order.Dist - @order.PIN</div>
+                <div class="p-element">
+                    <strong id="mobile">Mobile Number : </strong>@order.Mobile
+                    @if (order.Alt_Mobile != null)
+                    {
+                        <span class="text-dark">, @order.Alt_Mobile</span>
+                    }
+                </div>
+            </div>
+            <div class="od-element p-0">
+                <label for="invoice" id="inv" title="Download Invoice">Invoice<button id="invoice" class="d-none"></button></label>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("cancel-container").style.display = "none";
+
+        const Cancel = () => {
+            const container = document.getElementById("cancel-container");
+
+            if (container.style.display === "none") {
+                container.style.display = "block";
+            } else {
+                container.style.display = "none";
+            }
+            
+        }
+    </script>
+</body>
+</html>

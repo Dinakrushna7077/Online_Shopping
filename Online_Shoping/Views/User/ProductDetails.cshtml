@@ -1,0 +1,149 @@
+﻿@model IEnumerable<Online_Shoping.Models.product_mst>
+@{
+    ViewBag.Title = "ProductDetails";
+    var first = Model.FirstOrDefault();
+    var cartItems = ViewBag.CartItems;
+    var returnUrl = ViewContext.HttpContext.Request.Path.ToString();
+}
+<html>
+<head>
+    <style>
+        .product-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        img {
+            aspect-ratio: 1/1;
+            height: 25rem;
+        }
+
+        .btn-buy, .btn-add, .btn-goto {
+            background-color: #fb641b;
+            opacity: 0.9;
+            color: white;
+            font-weight: bold;
+            padding: 1rem;
+            width: 9rem;
+            text-align: center;
+            border-radius:0.2rem;
+            
+        }
+
+        .btn-buy {
+            background-color: #fb641b;
+        }
+
+            .btn-buy:hover {
+                background-color: #fb641b;
+                opacity: 1;
+                color: white;
+                cursor: pointer;
+            }
+
+
+        .btn-add {
+            background-color: #ffc100;
+        }
+
+            .btn-add:hover {
+                background-color: #ffc100;
+                opacity: 1;
+                color: white;
+                cursor: pointer;
+            }
+
+        .btn-goto {
+            background-color: forestgreen;
+        }
+
+            .btn-goto:hover {
+                opacity: 1;
+                color: white;
+                cursor: pointer;
+            }
+
+        .p-img {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .details {
+            /*border:1px solid #d6d6d6;*/
+            padding-top: 1.5rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .rating {
+            /*background-color:#ffd800;*/
+            border-radius: 4px;
+            padding: 2px 4px 2px 4px;
+        }
+
+            .rating .rtng {
+                color: forestgreen;
+                display: inline;
+                background-color: lightgray;
+                border-radius: 8px;
+                padding: 2px;
+            }
+
+        #p-desc {
+            font-family: Arial, sans-serif;
+        }
+        #product{
+            background-color:lightgray;
+            color:black;
+            padding:0.2rem;
+            border-radius:0.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <div class="p-img">
+            <img src="@Url.Content(first.image)" />
+            <div class="d-flex justify-content-around w-100">
+                <a class="btn-buy" href="@Url.Action("DeliveryAddress", "User", new { pid = first.p_id })">Buy Now</a>
+                @if (cartItems.Contains(first.p_id))
+                {
+                    <a class="btn-goto" href="@Url.Action("MyCart", "User")">Go To Cart</a>
+                }
+                else
+                {
+                    <a class="btn-add" href="@Url.Action("AddToCart", "User", new { pid = first.p_id , returnUrl =returnUrl})">Add To Cart</a>
+                }
+            </div>
+        </div>
+        <div class="details">
+            <h4><b id="product">@first.p_name</b></h4>
+            <p id="p-desc">@first.p_desc</p>
+
+            <div class="rating">
+                <b>Rating</b>
+                @if (first.rating > 3.5)
+                {
+                    <h6 class="rtng"> @first.rating <i class="fas fa-star"></i></h6>
+                }
+                else
+                {
+                    <h6> @first.rating <i class="fas fa-star"></i></h6>
+                }
+            </div>
+            <div class="price">
+                <h6 class="d-inline">MRP : ₹<s>@first.price.ToString("0,00.00")</s></h6>
+            </div>
+            <div class="c-price">
+                <h6><b class="text-success">Special Price</b> : @first.CostPrice.ToString("₹00.00") &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b class="text-primary">@first.discount % Off</b></h6>
+            </div>
+            <div>
+                <i class="fa-solid fa-rotate-left"></i> 10 Day Replacement Policy
+            </div>
+        </div>
+    </div>
+</body>
+</html>

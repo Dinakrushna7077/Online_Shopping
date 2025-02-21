@@ -1,0 +1,289 @@
+﻿* {
+    box-sizing: border-box
+}
+
+/* Set a style for all buttons */
+/*.lbl-bttn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}*/
+
+.cancelbtn, .deletebtn:hover {
+    opacity: 1;
+}
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+    /*float: left;*/
+    width: 22%;
+    font-weight: 500;
+    font-size:larger;
+    letter-spacing: 1px;
+    text-align:center;
+    padding:0.8rem;
+    opacity:0.9;
+    border-radius:0.2rem;
+    cursor:pointer;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+    background-color: #ccc;
+    color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+    background-color: #f44336;
+    background-color:forestgreen;
+    color:white;
+}
+
+/* Add padding and center-align text to the container */
+.container {
+    padding: 16px;
+    /*text-align: center;*/
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(100, 100, 100, 0.5);
+    backdrop-filter: blur(50%);
+    padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+/* The Modal Close Button (x) */
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #f44336;
+        cursor: pointer;
+    }
+
+/* Clear floats */
+.clearfix {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+/* .clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+} */
+.btn-cont {
+    display: flex;
+    justify-content: space-around;
+}
+
+#btn-cancel {
+    padding: 4px;
+    color: white;
+    background-color: gray;
+    width: 25%;
+}
+
+#btn-confirm {
+    text-align:center;
+    background-color: orangered;
+    padding: 0.8rem;
+    color: white;
+    width: 20%;
+    height:100%;
+    border-radius:5px;
+    font-weight:600;
+    letter-spacing:1px;
+    cursor:pointer;
+}
+
+#popup-msg {
+    font-weight: 500;
+    font-size: larger;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+    .cancelbtn, .deletebtn {
+        width: 100%;
+    }
+}
+body {
+    background-color: rgb(128, 128, 128,0.2);
+}
+
+.address {
+    height: 6rem;
+    width: 100%;
+    /*position: sticky;
+            bottom: 0rem;*/
+    background-color: white;
+    /*box-shadow: 0 0 4px black;*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem;
+    border-bottom: 0.1rem dashed rgb(128, 128, 128,0.2);
+}
+
+.add-type {
+    display: inline;
+    border: 1px solid black;
+    padding: 0.2rem;
+    background-color: rgb(128, 128, 128,0.2);
+    border-radius: 0.2rem;
+}
+
+.add-left {
+    width: 85%;
+}
+
+.place-container {
+    display: flex;
+    height: 100%;
+    width: 98%;
+    padding: 2rem 0 2rem 0;
+    /*background-color:yellowgreen;*/
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.loop {
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+}
+
+.loop-cont {
+    background-color: white;
+    width: 15rem;
+    height: 15rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 6px 8px -6px;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 9rem;
+}
+
+.price {
+    color: dodgerblue;
+}
+
+h4 {
+    color: dimgrey;
+}
+
+.right-cont {
+    background-color: white;
+    /*padding: 0.5rem;*/
+    display: flex;
+    flex-direction: column;
+    /*justify-content:space-between;*/
+    margin-bottom: 1rem;
+    height: 20rem;
+    width: 70%;
+    margin-left: 0.6rem;
+    position: sticky;
+    top: 60px;
+    box-shadow: 0 0 6px gray;
+}
+
+#icon {
+    font-size: 3rem;
+    color: green;
+    padding-right: 12px;
+    opacity: 0.8;
+}
+
+img {
+    height: 9rem;
+}
+
+.details {
+    font-weight: 600;
+}
+
+#address, #p-mode, #total-a {
+    color: gray;
+    text-transform: uppercase;
+}
+
+#payment-mode {
+    border-bottom: 0.1rem dashed rgb(128, 128, 128,0.2);
+    padding: 1.4rem 1.2rem 1.4rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+#cost-p {
+    color: dodgerblue;
+}
+
+#btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 1.5rem 1.2rem 1.5rem 1.2rem;
+}
+
+#saving {
+    color: green;
+    font-size: large;
+}
+
+#icon-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#btn-place {
+    height: 3rem;
+    width: 10rem;
+    border-radius: 5px;
+    background-color: orangered;
+    border: none;
+    box-shadow: 0 0 5px gray;
+    color: white;
+    font-size: larger;
+    font-weight: 500;
+}

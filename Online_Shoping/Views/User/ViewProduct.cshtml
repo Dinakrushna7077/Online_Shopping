@@ -1,0 +1,215 @@
+﻿@model IEnumerable<Online_Shoping.Models.product_mst>
+
+@{
+    ViewBag.Title = "ViewProduct";
+    var cartItems = ViewBag.CartItems;
+}
+
+<html>
+<head>
+    <title>View Product</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <link rel="stylesheet" href="~/Content/ViewCatHover.css" />
+    <script src="~/Content/MyScript.js"></script>
+    <style>
+        .loop {
+            display: flex;
+            width: 100%;
+            border: 1px solid black;
+            padding: 0.9rem 0.9rem 0.9rem 0rem;
+            margin: 0rem 0rem 1.2rem 0rem;
+            border-radius: 5px;
+        }
+        .ancher {
+            color: black;
+            text-decoration: none;
+        }
+        .ancher:hover{
+            color:black;
+            text-decoration:none;
+        }
+
+            .loop .img-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 15rem;
+                width: 220px;
+                border-right: 1px solid black;
+                padding: 10px;
+            }
+
+        .img-container img {
+            transition: all .1s linear 100ms;
+            height: 12.5rem;
+            width: 12.5rem;
+        }
+
+            .img-container img:hover {
+                height: 13rem;
+                width: 13rem;
+            }
+
+        .loop .details-container {
+            display: flex;
+            flex-direction: column;
+            height: 220px;
+            width: 100%;
+            margin-left: 15px;
+        }
+
+        .details-container * {
+            margin-top: 0.4rem;
+        }
+
+        .details-container h4 {
+            background-color: rgba(11,11,11,0.1);
+            padding: 2px;
+            display: inline-block;
+        }
+
+        .rating {
+            /*background-color:#ffd800;*/
+            border-radius: 4px;
+            padding: 2px 4px 2px 4px;
+        }
+
+            .rating span {
+                background-color: lightgray;
+                border-radius: 8px;
+                padding: 2px;
+            }
+
+        .btn-container {
+            display: flex;
+            width: 15rem;
+            justify-content: space-between;
+            margin:0;
+            padding:0;
+        }
+
+        .btn-buy {
+            background-color: #fb641b;
+            opacity: 0.9;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn-go {
+            background-color: forestgreen;
+            filter: contrast(110%);
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn-add {
+            background-color: #ffc100;
+            opacity: 0.9;
+            color: white;
+            font-weight: bold;
+        }
+
+            .btn-add:hover {
+                background-color: #ffc100;
+                opacity: 1;
+                color:white;
+            }
+
+        .btn-go:hover {
+            background-color: forestgreen;
+            opacity: 1;
+            filter:contrast(120%);
+            color:white;
+        }
+
+        .btn-buy:hover {
+            background-color: #fb641b;
+            opacity: 1;
+            color:white;
+        }
+
+        .mp {
+            display: inline;
+        }
+        .cp{
+            color:green;
+        }
+        .discount {
+            font-size: 16px;
+            margin-left: 2rem;
+            color: dodgerblue;
+        }
+        
+    </style>
+</head>
+<body>
+    @*@Html.Raw(TempData["Msg"])*@
+    <div class="container p-2" id="p">
+        <div class="row" style="margin-bottom:60px;">
+            @if (Model != null)
+            {
+                foreach (var i in Model)
+                {
+                    <a class="ancher" href="@Url.Action("ProductDetails", "User", new {pid=i.p_id})">
+                        <div class="loop">
+                            <div class="img-container"><img src="@Url.Content(i.image)" alt="@i.p_name" /></div>
+                            <div class="details-container" title="View Details">
+                                <div class="d-block m-0">
+                                    <h4 style="color:#000000;">@i.p_name</h4><br />
+                                    <strong class="rating">
+                                        Rating
+                                        @if (i.rating > 3.5)
+                                        {
+                                            <span style="color:forestgreen"> @i.rating <i class="fas fa-star"></i></span>
+                                        }
+                                        else
+                                        {
+                                            <span> @i.rating <i class="fas fa-star"></i></span>
+                                        }
+                                    </strong>
+                                    <h6 class="p-desc">
+                                        @i.p_desc
+                                    </h6>
+                                    <p class="mp">MRP <s>₹@i.price.ToString(",00.00") </s></p> <b class="discount">@i.discount% Off</b>
+
+                                    <h5>₹@i.CostPrice.ToString(",00.00")<i class="cp"> Special Price</i></h5>
+                                </div>
+                                <div class="btn-container">
+                                    @Html.ActionLink("Buy Now", "DeliveryAddress", "User", new { pid = i.p_id }, new { @class = "btn btn-buy" })
+                                    @if (cartItems.Contains(i.p_id))
+                                    {
+                                        @Html.ActionLink("Go To Cart", "MyCart", "User", new { pid = i.p_id }, new { @class = "btn btn-go" })
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Add To Cart", "AddToCart", "User", new { pid = i.p_id, cat_id = i.c_id }, new { @class = "btn btn-add" })
+                                        //@Ajax.ActionLink("Add To Cart", "AddToCart", "User", new { pid = i.p_id }, new AjaxOptions() { HttpMethod = "GET",InsertionMode=InsertionMode.Replace,UpdateTargetId="p", OnSuccess = "showPopupMessage" }, new { @class = "btn btn-add" })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
+            }
+        </div>
+    </div>
+    <div class="mt-xxl-4 text-center">
+        <h5 class="text-danger m-1">No More Product . . . </h5>
+    </div>
+    <script>
+        function showPopupMessage(result) {
+            var message = result.message;
+            var popupMessage = $('#popupMessage');
+            popupMessage.text(message).fadeIn();
+            setTimeout(function () {
+                popupMessage.fadeOut();
+            }, 3000);
+        }
+    </script>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+</body>
+</html>

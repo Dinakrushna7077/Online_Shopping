@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Online_Shoping.Models.category>
+@{
+    ViewBag.Title = "UserHome";
+}
+
+
+<html>
+<head>
+    <title>View Categories</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Hover.css" />
+</head>
+<body>
+    @Html.Raw(TempData["Msg"])
+    
+    <div class="container p-2">
+        <div class="row" style="margin-bottom:60px;">
+            @if (Model != null)
+            {
+                foreach (var i in Model)
+                {
+                    @*<div >*@
+                        <a class="col-md-3 col-lg-4 col-xl-2  mb-1 hov-cls" href="@Url.Action("ViewProduct", "User",new { cat_id = i.cat_id })">
+                            <img src="@Url.Content(@i.image)" />
+                            <h5 style="color:#808080; text-align:center;">@i.name</h5>
+                        </a>
+                    @*</div>*@
+                    
+                }
+            }
+        </div>
+    </div>
+    <div class="mt-xxl-4 text-center">
+        <h6 class="text-danger m-1">No More Categories . . . </h6>
+    </div>
+    
+</body>
+</html>
+
+
