@@ -29,9 +29,9 @@ namespace Online_Shoping.Models
         public string email { get; set; }
         public long contact { get; set; }
         public string password { get; set; }
-        public string NewPass { get; set; }
         public string ConfirmPass {  get; set; }
-        public int CaptchaCode {  get; set; }
+        public string NewPass { get; set; }
+        public int CaptchaCode { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<my_cart> my_cart { get; set; }

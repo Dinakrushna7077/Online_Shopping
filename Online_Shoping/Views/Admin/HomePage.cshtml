@@ -3,8 +3,17 @@
     ViewBag.Title = "HomePage";
 }
 
-<h2>HomePage</h2>
 
-<h2>Home</h2>
 
-@Html.ActionLink("Add Category", "CreateCategory", "Admin")
+<h2>Admin Controls</h2>
+
+@Html.ActionLink("Add Category", "CreateCategory", "Admin")<br />
+@Html.ActionLink("Upload Product", "UploadProduct", "Admin")<br/>
+@Html.ActionLink("View Category", "ViewCategory", "Admin")<br/>
+<br />
+<br />
+<hr />
+<br />
+<br />
+@Html.ActionLink("Order Requests !", "OrderRequests", "Admin") <br />
+@Html.ActionLink("Out For Delicery", "Delivery", "Admin")

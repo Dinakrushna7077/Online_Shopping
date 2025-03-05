@@ -25,9 +25,7 @@ namespace Online_Shoping.Models
         public string name { get; set; }
         public int adm_id { get; set; }
         public string image { get; set; }
-        public HttpPostedFileBase File {  get; set; }
-
-
+        public HttpPostedFileBase File { get; set; }
         public virtual Admin Admin { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<product_mst> product_mst { get; set; }

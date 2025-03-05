@@ -25,3 +25,10 @@ let Cancel = () => {
 }
 
 //Order Success
+const sear = ["Find Me", "Redmi", "Vivo", "Oppo", "Samsung", "Laptop", "HP Paviliion", "Lenevo", "Search Here"]
+let inval = 0;
+let s = document.getElementById("srch");
+setInterval(() => {
+    inval = (inval + 1) % sear.length;
+    s.placeholder = sear[inval];
+}, 2000);

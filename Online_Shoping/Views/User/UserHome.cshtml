@@ -11,23 +11,36 @@
     <link rel="stylesheet" href="~/Content/bootstrap.css" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="~/Content/Hover.css" />
+    <style>
+        .slider {
+            width:100%;
+            transition: transform 0.5s ease-in-out;
+        }
+            .slider img {
+                width: 100%;
+                height:100%;
+            }
+    </style>
 </head>
 <body>
     @Html.Raw(TempData["Msg"])
     
     <div class="container p-2">
-        <div class="row" style="margin-bottom:60px;">
+        
+            <div class="slider">
+                <img id="slideimg" src="~/Assets/add3.jpg" >
+            </div>
+        
+        <div class="row justify-content-between" style="margin-bottom:60px;">
+
             @if (Model != null)
             {
                 foreach (var i in Model)
-                {
-                    @*<div >*@
-                        <a class="col-md-3 col-lg-4 col-xl-2  mb-1 hov-cls" href="@Url.Action("ViewProduct", "User",new { cat_id = i.cat_id })">
+                {                    
+                        <a class=" hov-cls" href="@Url.Action("ViewProduct", "User",new { cat_id = i.cat_id })">
                             <img src="@Url.Content(@i.image)" />
                             <h5 style="color:#808080; text-align:center;">@i.name</h5>
-                        </a>
-                    @*</div>*@
-                    
+                        </a>                    
                 }
             }
         </div>
@@ -35,7 +48,15 @@
     <div class="mt-xxl-4 text-center">
         <h6 class="text-danger m-1">No More Categories . . . </h6>
     </div>
-    
+    <script>
+        const images = ["/Assets/ad1.jpg", "/Assets/add2.jpg", "/Assets/adv4 amgn.jpg", "/Assets/add3.jpg"];
+        let index = 0;
+        let slideimg = document.getElementById('slideimg');
+        setInterval(()=>{
+            index=(index+1)% images.length;
+            slideimg.src = images[index];
+        },2500);
+    </script>
 </body>
 </html>
 

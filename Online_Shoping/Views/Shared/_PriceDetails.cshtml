@@ -19,21 +19,21 @@
             Price(@Model.Sum(a => a.Quantity) items)
         </div>
         <div>
-            ₹@TotalMP.ToString("0,00.00")
+            ₹@TotalMP.ToString("0.00")
         </div>
     </div>
     <div class="price-element">
         <div>Discount </div>
-        <div id="discount-price">- ₹@Discount.ToString("0,00.00")</div>
+        <div id="discount-price">- ₹@Discount.ToString("0.00")</div>
     </div>
     <div class="price-element">
         <div>Offers </div>
         <div class="offer">@TempData["NoOfOffers"] Offers applyed</div>
     </div>
     <div class="price-element amount-border">
-        <h5>TOTAL AMOUNT</h5> <h5>₹ @TotalP.ToString("0,00.00")</h5>
+        <h5>TOTAL AMOUNT</h5> <h5>₹ @TotalP.ToString("0.00")</h5>
     </div>
     <div class="amount-border">
-        <b id="save">You will Save ₹ @Discount On This Order</b>
+        <b id="save">You will Save ₹@Discount.ToString("0.00") On This Order</b>
     </div>
 </div>

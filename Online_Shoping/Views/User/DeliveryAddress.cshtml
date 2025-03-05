@@ -109,6 +109,7 @@
                 color: white;
                 text-align: center;
                 margin-bottom: 0.05rem;
+                width:5rem;
             }
 
         .btn-remove {
@@ -227,10 +228,10 @@
         </div>
         <div class="right-cont">
             
-            <div class="add-header"><h5>Total Amount : ₹@Model.FirstOrDefault().TotalPrice.ToString("0,00.00")</h5></div>
+            <div class="add-header"><h5>Total Amount : ₹@Model.FirstOrDefault().TotalPrice.ToString("0.00")</h5></div>
             <div class="d-flex flex-column justify-content-around m-3" style="height:7rem;">
                 <div>
-                    <input type="radio" id="cod" name="payment" /> <label for="cod">Cash On Delivery</label>
+                    <input type="radio" id="cod" name="payment" checked /> <label for="cod">Cash On Delivery</label>
                 </div>
                 <div class="disabled">
                     <input type="radio" id="upi" name="payment" disabled="disabled" /> <label for="upi">UPI</label>

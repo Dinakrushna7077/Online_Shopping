@@ -3,18 +3,19 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 160px;
+            height: 16rem;
+            width:20rem;
         }
             .hov-cls img {
                 width: 100%;
-                height: 67%;
+                height: 75%;
                 border-radius: 10px;
                 border: 2px solid black;
                 transition: all 0.1s ease-in-out 100ms;
             }
             .hov-cls img:hover {
                 width: 103%;
-                height: 70%;
+                height: 78%;
                 filter:contrast(115%);
             }
             .hov-cls h5 {

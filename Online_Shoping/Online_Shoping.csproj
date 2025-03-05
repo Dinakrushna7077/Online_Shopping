@@ -192,6 +192,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ad1.jpg" />
+    <Content Include="Assets\add2.jpg" />
+    <Content Include="Assets\add3.jpg" />
+    <Content Include="Assets\adv4 amgn.jpg" />
     <Content Include="Assets\icon2.png" />
     <Content Include="Assets\icon3.png" />
     <Content Include="Content\bootstrap-grid.css" />

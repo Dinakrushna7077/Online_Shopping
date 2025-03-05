@@ -33,7 +33,9 @@ namespace Online_Shoping.Controllers
             }
             else
             {
-                return View(db.categories.ToList());
+                cat=db.categories.ToList();
+                cat=cat.OrderBy(r => Guid.NewGuid()).ToList();
+                return View(cat);
             }
         }
         public ActionResult Logout()
@@ -46,8 +48,12 @@ namespace Online_Shoping.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult UserLogin(user_mst user, string ReturnUrl)
+        public ActionResult UserLogin(user_mst user, string ReturnUrl, string SearchBy)
         {
+            if (SearchBy != null)
+            {
+                return RedirectToAction("ViewProduct", new { SearchBy });
+            }
             if (user.email == null || user.password == null)
             {
                 //if gmail or password field null
@@ -90,8 +96,13 @@ namespace Online_Shoping.Controllers
             }
         }
         //-------------------------------------------------- User Sign Up Page ------------------------------------------------------
-        public ActionResult SignUp()
+        [Authorize]
+        public ActionResult SignUp(string SearchBy)
         {
+            if (SearchBy != null)
+            {
+                return RedirectToAction("ViewProduct", new { SearchBy });
+            }
             return View();
         }
         [HttpPost]
@@ -117,7 +128,7 @@ namespace Online_Shoping.Controllers
             }
         }
         /*--------------------------------------Upload Products-------------------------------------------*/
-
+        [Authorize]
         public ActionResult ViewProduct(int? cat_id, string SearchBy)
         {
             int userId = Convert.ToInt32(Session["Admin_Id"]);
@@ -144,7 +155,8 @@ namespace Online_Shoping.Controllers
                 product.CostPrice = product.price - (product.price * product.discount / 100);
             }
             return View(products);
-        }        
+        }
+        [Authorize]
         public ActionResult AddToCart(int pid,my_cart cart,int? cat_id,string returnUrl)
         {
             cart.u_id = Convert.ToInt32(Session["Admin_Id"]);
@@ -176,8 +188,14 @@ namespace Online_Shoping.Controllers
             return RedirectToAction("ViewProduct", "User", new { cat_id });
         }
         //---------------------------------------------MyCart ActionResult --------------------------------------------
-        public ActionResult MyCart()
+        [Authorize]
+        public ActionResult MyCart(string SearchBy)
         {
+            if (SearchBy != null)
+            {
+                
+                return RedirectToAction("ViewProduct",new {SearchBy});
+            }
             int UserId=Convert.ToInt32(Session["Admin_Id"]);
             double TotalPrice = 0;
             int count = 0;
@@ -338,8 +356,14 @@ namespace Online_Shoping.Controllers
             return cap;
          }
         //-------------------------------------------------Address Page Management---------------------------------Dt: 26th December 2024 
-        public ActionResult DeliveryAddress(int? pid)
+
+        [Authorize]
+        public ActionResult DeliveryAddress(int? pid, string SearchBy)
         {
+            if (SearchBy != null)
+            {
+                return RedirectToAction("ViewProduct", new { SearchBy });
+            }
             int UserId = Convert.ToInt32(Session["Admin_Id"]);
             var address = db.User_Address.Where(a => a.U_id == UserId).FirstOrDefault();
             if (address == null)
@@ -387,8 +411,13 @@ namespace Online_Shoping.Controllers
         {            
             return RedirectToAction("PlaceOrder", "User", new {add_id,pid});
         }
-        public ActionResult AddNewAddress(int? pid)
+        [Authorize]
+        public ActionResult AddNewAddress(int? pid, string SearchBy)
         {
+            if (SearchBy != null)
+            {
+                return RedirectToAction("ViewProduct", new { SearchBy });
+            }
             List<string>State = new List<string> { "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh","Lakshadweep", "Delhi", "Puducherry"};
             ViewBag.StateList = new SelectList(State);
             TempData["pid"] = pid;
@@ -417,17 +446,23 @@ namespace Online_Shoping.Controllers
                 return View();
             }
         }
-        public ActionResult DeleteAddress(int add_id)
+        /*--------------------------------Remove Address ----------------------------------------------------*/
+        /* public ActionResult DeleteAddress(int add_id)
+         {
+             int UserId = Convert.ToInt32(Session["Admin_Id"]);
+             var row=db.User_Address.Where(u=> u.U_id == UserId && u.Add_id==add_id).FirstOrDefault();
+             db.Entry(row).State=EntityState.Deleted;
+             db.SaveChanges();
+             return RedirectToAction("DeliveryAddress", "User");
+         }*/
+        [Authorize]
+        public ActionResult EditAddress(int add_id, string SearchBy)
         {
             int UserId = Convert.ToInt32(Session["Admin_Id"]);
-            var row=db.User_Address.Where(u=> u.U_id == UserId && u.Add_id==add_id).FirstOrDefault();
-            db.Entry(row).State=EntityState.Deleted;
-            db.SaveChanges();
-            return RedirectToAction("DeliveryAddress", "User");
-        }
-        public ActionResult EditAddress(int add_id)
-        {
-            int UserId = Convert.ToInt32(Session["Admin_Id"]);
+            if (SearchBy != null)
+            {
+                return RedirectToAction("ViewProduct", new { SearchBy });
+            }
             List<string> State = new List<string> { "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Lakshadweep", "Delhi", "Puducherry" };
             ViewBag.StateList = new SelectList(State);
             var address = db.User_Address.Where(model => model.U_id == UserId && model.Add_id == add_id).FirstOrDefault();
@@ -451,9 +486,15 @@ namespace Online_Shoping.Controllers
             db.SaveChanges();
             return RedirectToAction("DeliveryAddress", "User");
         }
-        public ActionResult PlaceOrder(int? add_id, int? pid)
+        [Authorize]
+        public ActionResult PlaceOrder(int? add_id, int? pid, string SearchBy)
         {
+
             int UserId = Convert.ToInt32(Session["Admin_Id"]);
+            if (SearchBy != null)
+            {
+                return RedirectToAction("ViewProduct", new { SearchBy });
+            }
             IEnumerable<PlaceOrder> data;
             TempData["pid"] = 0;
             if (pid.HasValue)
@@ -545,10 +586,15 @@ namespace Online_Shoping.Controllers
         {
             double CostPrice = MPrice - (MPrice * discount / 100);
             return CostPrice*quantity;
-        }        
-        public ActionResult ConfirmPlaceOrder(int  Add_Id)
+        }
+        [Authorize]
+        public ActionResult ConfirmPlaceOrder(int  Add_Id, string SearchBy)
         {            
             int UserId = Convert.ToInt32(Session["Admin_Id"]);
+            if (SearchBy != null)
+            {
+                return RedirectToAction("ViewProduct", new { SearchBy });
+            }
             PlaceOrder po=new PlaceOrder();
             Order_mst order = new Order_mst()
             {
@@ -599,19 +645,26 @@ namespace Online_Shoping.Controllers
             }
             return RedirectToAction("OrderSuccess","User");
         }
+        [Authorize]
         public ActionResult OrderSuccess()
         {
             return View();
         }
+        [Authorize]
         public ActionResult Orders()
         {
             int UserId = Convert.ToInt32(Session["Admin_Id"]);
             IEnumerable<Order_View> orders = db.Order_View.Where(o => o.u_id == UserId).OrderByDescending(od => od.od_id).ToList();            
             return View(orders);
         }
-        public ActionResult ProductDetails(int pid)
+        [Authorize]
+        public ActionResult ProductDetails(int pid, string SearchBy)
         {
             int UserId = Convert.ToInt32(Session["Admin_Id"]);
+            if (SearchBy != null)
+            {
+                return RedirectToAction("ViewProduct", new { SearchBy });
+            }
             var cartItems = db.my_cart.Where(cart => cart.u_id == UserId && cart.cart_statu == "active").Select(cart => cart.p_id).ToList();
             ViewBag.CartItems = cartItems;
             IEnumerable<product_mst> products;
@@ -630,12 +683,18 @@ namespace Online_Shoping.Controllers
             }).ToList();
             return View(products);
         }
-        public ActionResult Order_Details(int od_id)
+        [Authorize]
+        public ActionResult Order_Details(int? od_id, string SearchBy)
         {
-            int UserId = Convert.ToInt32(Session["Admin_Id"]);            
+            int UserId = Convert.ToInt32(Session["Admin_Id"]);
+            if (SearchBy != null)
+            {
+                return RedirectToAction("ViewProduct", new { SearchBy });
+            }
             IEnumerable<Order_Details_View> order=db.Order_Details_View.Where(u => u.u_id==UserId && u.od_id==od_id).ToList();
             return View(order);
         }
+        [Authorize]
         public ActionResult CancelOrder(int od_id,string reason)
         {
             int UserId = Convert.ToInt32(Session["Admin_Id"]);

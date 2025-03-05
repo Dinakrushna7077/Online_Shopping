@@ -25,15 +25,15 @@ namespace Online_Shoping.Models
         public int p_id { get; set; }
         public string p_name { get; set; }
         public double price { get; set; }
-        public double CostPrice {  get; set; }
+        public double CostPrice { get; set; }
         public string p_status { get; set; }
         public string p_desc { get; set; }
         public string image { get; set; }
+        public HttpPostedFileBase File { get; set; }
         public int u_id { get; set; }
         public int c_id { get; set; }
         public int quantity { get; set; }
         public int discount { get; set; }
-        public HttpPostedFileBase File {  get; set; }
         public Nullable<System.DateTime> added_date { get; set; }
         public string brand { get; set; }
         public string img2 { get; set; }

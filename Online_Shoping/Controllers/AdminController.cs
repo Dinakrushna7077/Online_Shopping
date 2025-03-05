@@ -38,6 +38,7 @@ namespace Online_Shoping.Controllers
                     if(psw==adm.password)
                     {
                         //if password matched...
+                        FormsAuthentication.SetAuthCookie(data.email, false);
                         Session["Admin_Id"]=data.a_id;
                         Session["UserName"]=data.name;
                         return RedirectToAction("HomePage", "Admin");
@@ -57,6 +58,7 @@ namespace Online_Shoping.Controllers
             }
 
         }
+        [Authorize]
         public ActionResult ViewCategory(string SearchBy)
         {
             if (Session["Admin_Id"]!=null)
@@ -78,8 +80,9 @@ namespace Online_Shoping.Controllers
             }
         }
 
-        
+
         // -----------------------------------------------------------  Home Page ---------------------------------------------------------------
+        [Authorize]
         public ActionResult HomePage()
         {
             if (Session["Admin_Id"] == null && Session["UserName"] == null)
@@ -94,6 +97,7 @@ namespace Online_Shoping.Controllers
 
 
         // ----------------------------------------------------------- Delete Categories  ---------------------------------------------------------------
+        [Authorize]
         public ActionResult DeleteCategory(int id)
         {
             var data = db.categories.Where(m => m.cat_id == id).FirstOrDefault();
@@ -120,6 +124,7 @@ namespace Online_Shoping.Controllers
 
         }
         // ---------------------------------------------------------------  Edit Categories  --------------------------------------------------------------
+        [Authorize]
         public ActionResult EditCategory(int id)
         {
             var data = db.categories.Where(m => m.cat_id == id).FirstOrDefault();
@@ -150,6 +155,7 @@ namespace Online_Shoping.Controllers
         }
 
         [OutputCache(Duration =600)]
+        [Authorize]
         public ActionResult UploadProduct()
         {
             if (Session["Admin_Id"] !=null)
@@ -233,6 +239,7 @@ namespace Online_Shoping.Controllers
                 return -1;
             }
         }
+        [Authorize]
         public ActionResult CreateCategory()
         {
             if (Session["Admin_Id"]!=null)
@@ -261,11 +268,13 @@ namespace Online_Shoping.Controllers
             }
             return View();
         }
+        [Authorize]
         public ActionResult OrderRequests()
         {
             var orders= db.Order_Details_View.Where(o => o.order_status=="Processing").ToList();
             return View(orders);
         }
+        [Authorize]
         public ActionResult AcceptOrder(int od_id)
         {
 
@@ -274,6 +283,7 @@ namespace Online_Shoping.Controllers
             db.SaveChanges();
             return RedirectToAction("OrderRequests","Admin");
         }
+        [Authorize]
         public ActionResult RejectOrder(int od_id)
         {
 
@@ -282,11 +292,13 @@ namespace Online_Shoping.Controllers
             db.SaveChanges();
             return RedirectToAction("OrderRequests","Admin");
         }
+        [Authorize]
         public ActionResult Delivery()
         {
             var orders = db.Order_Details_View.Where(o => o.order_status=="Confirmed").ToList();
             return View(orders);
         }
+        [Authorize]
         public ActionResult Delivered(int od_id)
         {
             var order = db.Order_Details.Where(o => o.od_id == od_id).FirstOrDefault();
@@ -294,6 +306,7 @@ namespace Online_Shoping.Controllers
             db.SaveChanges();
             return RedirectToAction("Delivery", "Admin");
         }
+        [Authorize]
         public ActionResult CancelOrder(int od_id)
         {
             var order = db.Order_Details.Where(o => o.od_id == od_id).FirstOrDefault();

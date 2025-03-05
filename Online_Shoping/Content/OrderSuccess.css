@@ -42,6 +42,12 @@ body {
     cursor: pointer;
     text-decoration: none;
 }
+#anch{
+    display:none;
+    color:white;
+    cursor:pointer;
+    pointer-events:painted;
+}
 
 .particle {
     position: absolute;
