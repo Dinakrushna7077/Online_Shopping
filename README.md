@@ -44,6 +44,6 @@ An online shopping platform built using the MVC architecture. This project inclu
 <ul>
   <li>GitHub: <a href="https://github.com/Dinakrushna7077">https://github.com/Dinakrushna7077</a></li>
   <li>Portfolio: <a href="https://dinakrushna7077.github.io/Dinakrushna-Portfolio/">https://yourportfolio.com</a></li>
-  <li>Email: <a href="mailto:dinakrushnamohanta7077@gmail.com">your.email@gmail.com</a></li>
+  <li>Email: <a href="mailto:dinakrushnamohanta7077@gmail.com">dinakrushnamohanta7077@gmail.com</a></li>
   <li>LinkedIn: <a href="https://www.linkedin.com/in/dinakrushna7077/">https://linkedin.com/in/yourlinkedin</a></li>
 </ul>
